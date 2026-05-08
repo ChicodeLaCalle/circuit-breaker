@@ -6,84 +6,109 @@ import { Menu, X, Zap } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'Roster', href: '/roster' },
-  { label: 'Artists', href: '/artists' },
-  { label: 'News', href: '/news' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'HOME', href: '/' },
+  { label: 'ROSTER', href: '/roster' },
+  { label: 'ARTISTS', href: '/artists' },
+  { label: 'NEWS', href: '/news' },
+  { label: 'CONTACT', href: '/contact' },
 ]
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-cb-black/90 backdrop-blur-md border-b border-cb-concrete">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-cb-black/95 backdrop-blur-sm border-b border-cb-concrete">
+      {/* Electric Top Border */}
+      <div className="h-px bg-gradient-to-r from-transparent via-cb-red to-transparent shadow-[0_0_10px_#ff0033]" />
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+          {/* Logo - MORE AGGRESSIVE */}
           <Link href="/" className="flex items-center gap-2 group">
-            <Zap className="w-6 h-6 text-cb-red group-hover:animate-pulse" />
+            <Zap className="w-7 h-7 text-cb-red group-hover:animate-pulse drop-shadow-[0_0_10px_rgba(255,0,51,0.8)]" />
             <span className="font-[family-name:var(--font-space)] text-xl font-bold tracking-tighter uppercase">
-              Circuit<span className="text-cb-red">Breaker</span>
+              <span className="text-cb-white">CIRCUIT</span>
+              <span className="text-cb-red glow-text">BREAKER</span>
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Desktop Navigation - DARKER STYLE */}
+          <nav className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-sm font-medium text-cb-off-white hover:text-cb-red transition-colors duration-200 uppercase tracking-wider"
+                className="px-4 py-2 text-xs font-bold text-cb-muted hover:text-cb-white transition-all duration-200 uppercase tracking-widest
+                         hover:bg-cb-concrete/50 relative group"
               >
                 {item.label}
+                {/* Hover electric underline */}
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-cb-red group-hover:w-full transition-all duration-300 shadow-[0_0_10px_#ff0033]" />
               </Link>
             ))}
             <Link
               href="/contact"
-              className="btn-primary text-sm"
+              className="ml-4 btn-primary text-xs py-3"
             >
-              Book Now
+              BOOK NOW
             </Link>
           </nav>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - DARKER */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-cb-off-white hover:text-cb-red transition-colors"
+            className="md:hidden p-2 text-cb-muted hover:text-cb-red transition-colors border border-cb-concrete hover:border-cb-red"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - DARKER UNDERGROUND STYLE */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-cb-dark border-t border-cb-concrete"
+            className="md:hidden bg-cb-black border-t border-cb-concrete"
           >
-            <nav className="flex flex-col px-4 py-4 gap-2">
-              {navItems.map((item) => (
-                <Link
+            {/* Scan line effect */}
+            <div className="scan-lines" />
+            
+            <nav className="flex flex-col px-4 py-4 gap-1">
+              {navItems.map((item, index) => (
+                <motion.div
                   key={item.label}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="py-3 text-sm font-medium text-cb-off-white hover:text-cb-red transition-colors uppercase tracking-wider border-b border-cb-concrete last:border-0"
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  {item.label}
-                </Link>
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="py-4 px-4 text-sm font-bold text-cb-muted hover:text-cb-white hover:bg-cb-gray transition-all uppercase tracking-widest
+                             border-l-2 border-transparent hover:border-cb-red flex items-center gap-3"
+                  >
+                    <span className="text-cb-red text-xs">//</span>
+                    {item.label}
+                  </Link>
+                </motion.div>
               ))}
-              <Link
-                href="/contact"
-                onClick={() => setIsOpen(false)}
-                className="btn-primary text-center mt-4"
+              <motion.div
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: navItems.length * 0.1 }}
+                className="mt-4"
               >
-                Book Now
-              </Link>
+                <Link
+                  href="/contact"
+                  onClick={() => setIsOpen(false)}
+                  className="btn-primary text-center block"
+                >
+                  BOOK NOW
+                </Link>
+              </motion.div>
             </nav>
           </motion.div>
         )}
