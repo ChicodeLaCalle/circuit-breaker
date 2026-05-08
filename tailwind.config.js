@@ -17,29 +17,31 @@ module.exports = {
           abyss: '#080808',
           dark: '#0c0c0c',
           
-          // Purple Scale
-          purple: '#6b21a8',
-          'purple-light': '#8b5cf6',
-          'purple-dark': '#4c1d95',
+          // Purple Scale - BRIGHTER for visibility
+          purple: '#9333ea',
+          'purple-light': '#a855f7',
+          'purple-bright': '#c084fc',
+          'purple-dark': '#581c87',
           'purple-deep': '#3b0764',
-          'purple-glow': 'rgba(107, 33, 168, 0.4)',
+          'purple-glow': 'rgba(147, 51, 234, 0.5)',
           
           // Accent Colors
-          violet: '#7c3aed',
-          indigo: '#4338ca',
-          magenta: '#a855f7',
+          violet: '#8b5cf6',
+          'violet-light': '#a78bfa',
+          indigo: '#6366f1',
+          magenta: '#d946ef',
           
           // Dark Grays
           gray: '#0f0f0f',
-          concrete: '#141414',
-          steel: '#1a1a1a',
-          light: '#222222',
+          concrete: '#1a1a1a',
+          steel: '#262626',
+          light: '#333333',
           
           // Text
           white: '#e0e0e0',
           'off-white': '#a0a0a0',
           muted: '#525252',
-          dim: '#333333',
+          dim: '#404040',
         }
       },
       fontFamily: {
@@ -54,17 +56,18 @@ module.exports = {
         'tentacle': 'tentacle 12s ease-in-out infinite',
         'circuit': 'circuit 20s linear infinite',
         'biomech': 'biomech 10s ease-in-out infinite',
-        'sigil-rotate': 'sigilRotate 30s linear infinite',
+        'sigil-rotate': 'sigilRotate 60s linear infinite',
         'pulse-glow': 'pulseGlow 4s ease-in-out infinite',
+        'flow': 'flow 15s ease-in-out infinite',
       },
       keyframes: {
         pulsePurple: {
           '0%, 100%': { 
-            boxShadow: '0 0 20px rgba(107, 33, 168, 0.3), 0 0 40px rgba(107, 33, 168, 0.1)',
-            opacity: '0.8'
+            boxShadow: '0 0 30px rgba(147, 51, 234, 0.4), 0 0 60px rgba(147, 51, 234, 0.2)',
+            opacity: '0.9'
           },
           '50%': { 
-            boxShadow: '0 0 40px rgba(107, 33, 168, 0.6), 0 0 80px rgba(107, 33, 168, 0.3)',
+            boxShadow: '0 0 60px rgba(147, 51, 234, 0.8), 0 0 100px rgba(147, 51, 234, 0.4)',
             opacity: '1'
           },
         },
@@ -79,8 +82,8 @@ module.exports = {
           '75%': { borderRadius: '60% 40% 60% 30% / 70% 30% 50% 60%' },
         },
         tentacle: {
-          '0%, 100%': { transform: 'scale(1) rotate(0deg)', opacity: '0.3' },
-          '50%': { transform: 'scale(1.1) rotate(5deg)', opacity: '0.5' },
+          '0%, 100%': { transform: 'scale(1) rotate(0deg)', opacity: '0.4' },
+          '50%': { transform: 'scale(1.1) rotate(5deg)', opacity: '0.7' },
         },
         circuit: {
           '0%': { strokeDashoffset: '1000' },
@@ -98,18 +101,22 @@ module.exports = {
         },
         pulseGlow: {
           '0%, 100%': { 
-            filter: 'drop-shadow(0 0 20px rgba(107, 33, 168, 0.5))',
-            opacity: '0.6'
+            filter: 'drop-shadow(0 0 30px rgba(147, 51, 234, 0.6))',
+            opacity: '0.7'
           },
           '50%': { 
-            filter: 'drop-shadow(0 0 40px rgba(107, 33, 168, 0.8))',
-            opacity: '0.9'
+            filter: 'drop-shadow(0 0 50px rgba(147, 51, 234, 0.9))',
+            opacity: '1'
           },
+        },
+        flow: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '50%': { transform: 'translateX(20px)' },
         },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-purple': 'linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #4c1d95 100%)',
+        'gradient-purple': 'linear-gradient(135deg, #3b0764 0%, #9333ea 50%, #7c3aed 100%)',
         'gradient-dark': 'linear-gradient(180deg, #080808 0%, #000000 100%)',
       },
     },

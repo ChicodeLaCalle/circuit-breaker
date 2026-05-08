@@ -27,7 +27,7 @@
     background-color: #000000;
   }
 
-  /* Dark Purple Scrollbar */
+  /* Purple Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -43,13 +43,13 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #6b21a8;
-    box-shadow: 0 0 10px #6b21a8;
+    background: #9333ea;
+    box-shadow: 0 0 10px #9333ea;
   }
 
   ::selection {
     @apply bg-cb-purple text-cb-white;
-    text-shadow: 0 0 10px #6b21a8;
+    text-shadow: 0 0 10px #9333ea;
   }
 }
 
@@ -59,16 +59,16 @@
     @apply relative px-8 py-4 bg-cb-purple-dark text-cb-white font-bold uppercase tracking-widest text-sm
            overflow-hidden transition-all duration-300;
     clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-    box-shadow: 0 0 20px rgba(107, 33, 168, 0.3), inset 0 0 20px rgba(107, 33, 168, 0.1);
-    text-shadow: 0 0 10px rgba(107, 33, 168, 0.5);
-    border: 1px solid rgba(107, 33, 168, 0.5);
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3), inset 0 0 20px rgba(147, 51, 234, 0.1);
+    text-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
+    border: 1px solid rgba(147, 51, 234, 0.5);
   }
 
   .btn-primary:hover {
     @apply bg-cb-purple;
-    box-shadow: 0 0 40px rgba(107, 33, 168, 0.6), inset 0 0 30px rgba(107, 33, 168, 0.2);
+    box-shadow: 0 0 40px rgba(147, 51, 234, 0.6), inset 0 0 30px rgba(147, 51, 234, 0.2);
     transform: translateY(-2px);
-    border-color: #8b5cf6;
+    border-color: #a855f7;
   }
 
   .btn-outline {
@@ -79,8 +79,8 @@
 
   .btn-outline:hover {
     @apply border-cb-purple text-cb-off-white;
-    box-shadow: 0 0 20px rgba(107, 33, 168, 0.3), inset 0 0 20px rgba(107, 33, 168, 0.1);
-    text-shadow: 0 0 10px rgba(107, 33, 168, 0.5);
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3), inset 0 0 20px rgba(147, 51, 234, 0.1);
+    text-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
   }
 
   /* Underground Card */
@@ -90,33 +90,33 @@
   }
 
   .card-underground:hover {
-    @apply border-cb-purple-dark;
-    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(107, 33, 168, 0.15);
+    @apply border-cb-purple;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(147, 51, 234, 0.15);
   }
 
   /* Purple Glow Text */
   .glow-purple {
     text-shadow: 
-      0 0 10px rgba(107, 33, 168, 0.8),
-      0 0 20px rgba(107, 33, 168, 0.4),
-      0 0 30px rgba(107, 33, 168, 0.2);
+      0 0 10px rgba(147, 51, 234, 0.8),
+      0 0 20px rgba(147, 51, 234, 0.4),
+      0 0 30px rgba(147, 51, 234, 0.2);
   }
 
   .glow-violet {
     text-shadow: 
-      0 0 10px rgba(124, 58, 237, 0.8),
-      0 0 20px rgba(124, 58, 237, 0.4),
-      0 0 30px rgba(124, 58, 237, 0.2);
+      0 0 10px rgba(139, 92, 246, 0.8),
+      0 0 20px rgba(139, 92, 246, 0.4),
+      0 0 30px rgba(139, 92, 246, 0.2);
   }
 
   /* Section Divider */
   .section-divider {
     @apply w-full h-px;
-    background: linear-gradient(90deg, transparent, #6b21a8, transparent);
-    box-shadow: 0 0 10px #6b21a8, 0 0 20px #6b21a8;
+    background: linear-gradient(90deg, transparent, #9333ea, transparent);
+    box-shadow: 0 0 10px #9333ea, 0 0 20px #9333ea;
   }
 
-  /* Cybersiglism Background Pattern */
+  /* VISIBLE Cybersigil Background Pattern */
   .cybersigil-bg {
     position: relative;
   }
@@ -127,12 +127,12 @@
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.15;
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10 L60 30 L80 35 L65 50 L70 70 L50 60 L30 70 L35 50 L20 35 L40 30 Z' fill='none' stroke='%236b21a8' stroke-width='0.5'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='%234c1d95' stroke-width='0.3'/%3E%3Cpath d='M10 50 Q30 30 50 50 T90 50' fill='none' stroke='%238b5cf6' stroke-width='0.3'/%3E%3C/svg%3E");
+    opacity: 0.25;
+    background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M60 15 L70 40 L95 45 L75 60 L80 85 L60 70 L40 85 L45 60 L25 45 L50 40 Z' fill='none' stroke='%23a855f7' stroke-width='1'/%3E%3Ccircle cx='60' cy='60' r='25' fill='none' stroke='%239333ea' stroke-width='0.8'/%3E%3Cpath d='M60 35 L60 85 M35 60 L85 60' stroke='%23c084fc' stroke-width='0.5'/%3E%3Ccircle cx='60' cy='35' r='3' fill='%23a855f7'/%3E%3Ccircle cx='85' cy='60' r='3' fill='%23a855f7'/%3E%3Ccircle cx='60' cy='85' r='3' fill='%23a855f7'/%3E%3Ccircle cx='35' cy='60' r='3' fill='%23a855f7'/%3E%3C/svg%3E");
     animation: sigilRotate 60s linear infinite;
   }
 
-  /* Biomechanical Circuit Lines */
+  /* Biomechanical Circuit Lines - VISIBLE */
   .circuit-lines {
     position: relative;
   }
@@ -143,13 +143,12 @@
     inset: 0;
     pointer-events: none;
     background-image: 
-      linear-gradient(90deg, transparent 98%, rgba(107, 33, 168, 0.1) 98%),
-      linear-gradient(0deg, transparent 98%, rgba(107, 33, 168, 0.1) 98%);
-    background-size: 40px 40px;
-    opacity: 0.3;
+      linear-gradient(90deg, transparent 97%, rgba(147, 51, 234, 0.3) 97%),
+      linear-gradient(0deg, transparent 97%, rgba(147, 51, 234, 0.3) 97%);
+    background-size: 50px 50px;
   }
 
-  /* Tentacle/Vein Effect */
+  /* Tentacle/Vein Effect - VISIBLE */
   .tentacle-overlay {
     position: relative;
   }
@@ -160,27 +159,36 @@
     inset: 0;
     pointer-events: none;
     background: 
-      radial-gradient(ellipse at 20% 80%, rgba(107, 33, 168, 0.15) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 50%, rgba(75, 0, 130, 0.08) 0%, transparent 70%);
+      radial-gradient(ellipse at 20% 80%, rgba(147, 51, 234, 0.25) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(168, 85, 247, 0.2) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
     animation: biomech 15s ease-in-out infinite;
   }
 
-  /* Organic Grid */
+  /* Organic Grid - VISIBLE */
   .organic-grid {
     background-image: 
-      linear-gradient(rgba(107, 33, 168, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(107, 33, 168, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(147, 51, 234, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(147, 51, 234, 0.08) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
-  /* Morphing Blob Effect */
+  /* Morphing Blob Effect - VISIBLE */
   .morph-blob {
     position: absolute;
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    background: linear-gradient(135deg, rgba(107, 33, 168, 0.2), rgba(124, 58, 237, 0.1));
-    filter: blur(80px);
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.3), rgba(168, 85, 247, 0.2));
+    filter: blur(60px);
     animation: morph 15s ease-in-out infinite;
+  }
+
+  /* Biomechanical SVG Overlay */
+  .biomech-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.3;
   }
 
   /* Noise Texture */
@@ -206,6 +214,29 @@
     inset: 0;
     background: radial-gradient(ellipse at center, transparent 0%, #000000 70%);
     pointer-events: none;
+  }
+
+  /* VISIBLE Neural Network Lines */
+  .neural-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(147, 51, 234, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+  }
+
+  /* VISIBLE Vein Network */
+  .vein-network {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    background: 
+      linear-gradient(135deg, transparent 40%, rgba(147, 51, 234, 0.2) 50%, transparent 60%),
+      linear-gradient(45deg, transparent 40%, rgba(168, 85, 247, 0.15) 50%, transparent 60%);
+    background-size: 100px 100px;
   }
 }
 
