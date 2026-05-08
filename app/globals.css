@@ -10,7 +10,7 @@
     --font-inter: 'Inter', sans-serif;
     --font-space: 'Space Grotesk', sans-serif;
     --background: #000000;
-    --foreground: #ffffff;
+    --foreground: #e0e0e0;
   }
 
   * {
@@ -27,7 +27,7 @@
     background-color: #000000;
   }
 
-  /* Darker Industrial scrollbar */
+  /* Dark Purple Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -43,226 +43,156 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #ff0033;
-    box-shadow: 0 0 10px #ff0033;
+    background: #6b21a8;
+    box-shadow: 0 0 10px #6b21a8;
   }
 
   ::selection {
-    @apply bg-cb-red text-cb-white;
-    text-shadow: 0 0 10px #ff0033;
+    @apply bg-cb-purple text-cb-white;
+    text-shadow: 0 0 10px #6b21a8;
   }
 }
 
 @layer components {
-  /* AGGRESSIVE Industrial Button Styles */
+  /* Underground Purple Button Styles */
   .btn-primary {
-    @apply relative px-8 py-4 bg-cb-red text-cb-white font-bold uppercase tracking-widest text-sm
-           overflow-hidden transition-all duration-200;
+    @apply relative px-8 py-4 bg-cb-purple-dark text-cb-white font-bold uppercase tracking-widest text-sm
+           overflow-hidden transition-all duration-300;
     clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-    box-shadow: 0 0 20px rgba(255, 0, 51, 0.3), inset 0 0 20px rgba(255, 0, 51, 0.1);
-    text-shadow: 0 0 10px rgba(255, 0, 51, 0.5);
+    box-shadow: 0 0 20px rgba(107, 33, 168, 0.3), inset 0 0 20px rgba(107, 33, 168, 0.1);
+    text-shadow: 0 0 10px rgba(107, 33, 168, 0.5);
+    border: 1px solid rgba(107, 33, 168, 0.5);
   }
 
   .btn-primary:hover {
-    @apply bg-cb-red-dark;
-    box-shadow: 0 0 40px rgba(255, 0, 51, 0.6), inset 0 0 30px rgba(255, 0, 51, 0.2);
+    @apply bg-cb-purple;
+    box-shadow: 0 0 40px rgba(107, 33, 168, 0.6), inset 0 0 30px rgba(107, 33, 168, 0.2);
     transform: translateY(-2px);
-  }
-
-  .btn-primary:active {
-    transform: translateY(0);
+    border-color: #8b5cf6;
   }
 
   .btn-outline {
     @apply relative px-8 py-4 bg-transparent text-cb-white font-bold uppercase tracking-widest text-sm
-           border-2 border-cb-concrete transition-all duration-200;
+           border-2 border-cb-concrete transition-all duration-300;
     clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
   }
 
   .btn-outline:hover {
-    @apply border-cb-red text-cb-red;
-    box-shadow: 0 0 20px rgba(255, 0, 51, 0.3), inset 0 0 20px rgba(255, 0, 51, 0.1);
-    text-shadow: 0 0 10px rgba(255, 0, 51, 0.5);
+    @apply border-cb-purple text-cb-off-white;
+    box-shadow: 0 0 20px rgba(107, 33, 168, 0.3), inset 0 0 20px rgba(107, 33, 168, 0.1);
+    text-shadow: 0 0 10px rgba(107, 33, 168, 0.5);
   }
 
-  /* DARKER Industrial Card */
-  .card-industrial {
+  /* Underground Card */
+  .card-underground {
     @apply bg-cb-abyss border border-cb-concrete p-6 transition-all duration-300;
-    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.9);
   }
 
-  .card-industrial:hover {
-    @apply border-cb-dim;
-    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 0, 51, 0.15);
+  .card-underground:hover {
+    @apply border-cb-purple-dark;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(107, 33, 168, 0.15);
   }
 
-  /* GLITCH Text Effect - MORE AGGRESSIVE */
-  .glitch-text {
-    @apply relative;
+  /* Purple Glow Text */
+  .glow-purple {
+    text-shadow: 
+      0 0 10px rgba(107, 33, 168, 0.8),
+      0 0 20px rgba(107, 33, 168, 0.4),
+      0 0 30px rgba(107, 33, 168, 0.2);
   }
 
-  .glitch-text::before,
-  .glitch-text::after {
-    content: attr(data-text);
-    @apply absolute top-0 left-0 w-full h-full;
+  .glow-violet {
+    text-shadow: 
+      0 0 10px rgba(124, 58, 237, 0.8),
+      0 0 20px rgba(124, 58, 237, 0.4),
+      0 0 30px rgba(124, 58, 237, 0.2);
   }
 
-  .glitch-text::before {
-    color: #ff0033;
-    animation: glitch-1 0.3s infinite linear alternate-reverse;
-    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-    text-shadow: 2px 0 #ff0033, -2px 0 #00ffff;
+  /* Section Divider */
+  .section-divider {
+    @apply w-full h-px;
+    background: linear-gradient(90deg, transparent, #6b21a8, transparent);
+    box-shadow: 0 0 10px #6b21a8, 0 0 20px #6b21a8;
   }
 
-  .glitch-text::after {
-    color: #00ffff;
-    animation: glitch-2 0.3s infinite linear alternate-reverse;
-    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-    text-shadow: -2px 0 #00ffff, 2px 0 #ff0033;
+  /* Cybersiglism Background Pattern */
+  .cybersigil-bg {
+    position: relative;
   }
 
-  @keyframes glitch-1 {
-    0% { transform: translate(0); }
-    20% { transform: translate(-3px, 3px); }
-    40% { transform: translate(-3px, -3px); }
-    60% { transform: translate(3px, 3px); }
-    80% { transform: translate(3px, -3px); }
-    100% { transform: translate(0); }
-  }
-
-  @keyframes glitch-2 {
-    0% { transform: translate(0); }
-    20% { transform: translate(3px, -3px); }
-    40% { transform: translate(3px, 3px); }
-    60% { transform: translate(-3px, -3px); }
-    80% { transform: translate(-3px, 3px); }
-    100% { transform: translate(0); }
-  }
-
-  /* Scan Line Overlay - MORE VISIBLE */
-  .scan-lines {
-    @apply relative overflow-hidden;
-  }
-
-  .scan-lines::after {
+  .cybersigil-bg::before {
     content: '';
-    @apply absolute inset-0 pointer-events-none;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(255, 0, 51, 0.05) 2px,
-      rgba(255, 0, 51, 0.05) 4px
-    );
-    animation: scan 8s linear infinite;
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.15;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10 L60 30 L80 35 L65 50 L70 70 L50 60 L30 70 L35 50 L20 35 L40 30 Z' fill='none' stroke='%236b21a8' stroke-width='0.5'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='%234c1d95' stroke-width='0.3'/%3E%3Cpath d='M10 50 Q30 30 50 50 T90 50' fill='none' stroke='%238b5cf6' stroke-width='0.3'/%3E%3C/svg%3E");
+    animation: sigilRotate 60s linear infinite;
   }
 
-  /* CRT/VHS Effect */
-  .crt-overlay {
-    @apply relative;
+  /* Biomechanical Circuit Lines */
+  .circuit-lines {
+    position: relative;
   }
 
-  .crt-overlay::before {
+  .circuit-lines::after {
     content: '';
-    @apply absolute inset-0 pointer-events-none z-50;
-    background: linear-gradient(
-      rgba(18, 16, 16, 0) 50%,
-      rgba(0, 0, 0, 0.25) 50%
-    );
-    background-size: 100% 4px;
-    animation: flicker 0.15s infinite;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: 
+      linear-gradient(90deg, transparent 98%, rgba(107, 33, 168, 0.1) 98%),
+      linear-gradient(0deg, transparent 98%, rgba(107, 33, 168, 0.1) 98%);
+    background-size: 40px 40px;
+    opacity: 0.3;
   }
 
-  /* Noise Texture Overlay */
+  /* Tentacle/Vein Effect */
+  .tentacle-overlay {
+    position: relative;
+  }
+
+  .tentacle-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: 
+      radial-gradient(ellipse at 20% 80%, rgba(107, 33, 168, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(75, 0, 130, 0.08) 0%, transparent 70%);
+    animation: biomech 15s ease-in-out infinite;
+  }
+
+  /* Organic Grid */
+  .organic-grid {
+    background-image: 
+      linear-gradient(rgba(107, 33, 168, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(107, 33, 168, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Morphing Blob Effect */
+  .morph-blob {
+    position: absolute;
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    background: linear-gradient(135deg, rgba(107, 33, 168, 0.2), rgba(124, 58, 237, 0.1));
+    filter: blur(80px);
+    animation: morph 15s ease-in-out infinite;
+  }
+
+  /* Noise Texture */
   .noise-overlay {
     @apply relative;
   }
 
   .noise-overlay::before {
     content: '';
-    @apply absolute inset-0 pointer-events-none opacity-[0.08] z-10;
+    @apply absolute inset-0 pointer-events-none z-10;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    animation: noise 0.5s steps(10) infinite;
-  }
-
-  /* Electric Glow Text */
-  .glow-text {
-    text-shadow: 
-      0 0 10px rgba(255, 0, 51, 0.8),
-      0 0 20px rgba(255, 0, 51, 0.4),
-      0 0 30px rgba(255, 0, 51, 0.2);
-  }
-
-  .glow-cyan {
-    text-shadow: 
-      0 0 10px rgba(0, 255, 255, 0.8),
-      0 0 20px rgba(0, 255, 255, 0.4),
-      0 0 30px rgba(0, 255, 255, 0.2);
-  }
-
-  /* Grid Background */
-  .grid-bg {
-    background-image: 
-      linear-gradient(rgba(255, 0, 51, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 0, 51, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
-  .grid-bg-sm {
-    background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 20px 20px;
-  }
-
-  /* Section Divider - SHARPER */
-  .section-divider {
-    @apply w-full h-px;
-    background: linear-gradient(90deg, transparent, #ff0033, transparent);
-    box-shadow: 0 0 10px #ff0033, 0 0 20px #ff0033;
-  }
-
-  /* Danger Zone Red Accent */
-  .danger-accent {
-    position: relative;
-  }
-
-  .danger-accent::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: #ff0033;
-    box-shadow: 0 0 10px #ff0033, 0 0 20px #ff0033;
-  }
-
-  /* Harsh Borders */
-  .border-harsh {
-    border: 1px solid #1a1a1a;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
-  }
-
-  .border-harsh:hover {
-    border-color: #ff0033;
-    box-shadow: 
-      inset 0 0 20px rgba(0, 0, 0, 0.8),
-      0 0 20px rgba(255, 0, 51, 0.2);
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .gradient-text-red {
-    @apply bg-gradient-to-r from-cb-red to-cb-red-dark bg-clip-text text-transparent;
-  }
-
-  .gradient-text-cyber {
-    @apply bg-gradient-to-r from-cb-red via-cb-magenta to-cb-cyan bg-clip-text text-transparent;
+    opacity: 0.05;
   }
 
   /* Vignette Effect */
@@ -274,24 +204,23 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at center, transparent 0%, #000000 100%);
+    background: radial-gradient(ellipse at center, transparent 0%, #000000 70%);
     pointer-events: none;
   }
 }
 
-/* Custom Animations */
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.98; }
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gradient-text-purple {
+    @apply bg-gradient-to-r from-cb-purple via-cb-violet to-cb-magenta bg-clip-text text-transparent;
+  }
 }
 
-@keyframes scan {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
-}
-
-/* Scrollbar Track Glow */
+/* Custom Scrollbar Track Glow */
 ::-webkit-scrollbar-track {
   background: #000000;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
 }

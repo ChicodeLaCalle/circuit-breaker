@@ -25,33 +25,37 @@ const footerLinks = {
 export default function Footer() {
   return (
     <footer className="bg-cb-black border-t border-cb-concrete relative overflow-hidden">
-      {/* Top Electric Line */}
-      <div className="h-px bg-gradient-to-r from-transparent via-cb-red to-transparent shadow-[0_0_10px_#ff0033]" />
+      {/* Top Purple Line */}
+      <div className="h-px bg-gradient-to-r from-transparent via-cb-purple to-transparent shadow-[0_0_10px_#6b21a8]" />
       
-      {/* Noise Overlay */}
-      <div className="absolute inset-0 noise-overlay pointer-events-none opacity-50" />
+      {/* Cybersigil Background Pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 10 L60 30 L80 35 L65 50 L70 70 L50 60 L30 70 L35 50 L20 35 L40 30 Z' fill='none' stroke='%236b21a8' stroke-width='0.5'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='%234c1d95' stroke-width='0.3'/%3E%3C/svg%3E")`,
+        }}
+      />
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand - DARKER */}
+          {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <Zap className="w-6 h-6 text-cb-red drop-shadow-[0_0_10px_rgba(255,0,51,0.8)]" />
+              <Zap className="w-6 h-6 text-cb-purple drop-shadow-[0_0_10px_rgba(107,33,168,0.8)]" />
               <span className="font-[family-name:var(--font-space)] text-xl font-bold tracking-tighter uppercase">
                 <span className="text-cb-white">CIRCUIT</span>
-                <span className="text-cb-red glow-text">BREAKER</span>
+                <span className="text-cb-purple glow-purple">BREAKER</span>
               </span>
             </Link>
             <p className="text-cb-muted text-sm mb-8 leading-relaxed">
               Premier Hard Techno booking agency. Representing the finest industrial electronic music talent across Europe.
             </p>
-            {/* Social Links - DARKER */}
             <div className="flex gap-3">
               {footerLinks.social.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="w-10 h-10 flex items-center justify-center bg-cb-gray border border-cb-concrete text-cb-muted hover:border-cb-red hover:text-cb-red hover:bg-cb-red/5 transition-all duration-200"
+                  className="w-10 h-10 flex items-center justify-center bg-cb-gray border border-cb-concrete text-cb-muted hover:border-cb-purple hover:text-cb-purple hover:bg-cb-purple/5 transition-all duration-200"
                   title={item.label}
                 >
                   <item.icon className="w-4 h-4" />
@@ -60,10 +64,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Navigation - SHARPER */}
+          {/* Navigation */}
           <div>
             <h3 className="text-cb-white font-bold uppercase tracking-widest text-sm mb-6 flex items-center gap-2">
-              <span className="w-2 h-2 bg-cb-red" />
+              <span className="w-2 h-2 bg-cb-purple" />
               NAVIGATION
             </h3>
             <ul className="space-y-3">
@@ -73,7 +77,7 @@ export default function Footer() {
                     href={link.href}
                     className="text-cb-muted hover:text-cb-white transition-colors text-sm uppercase tracking-wider flex items-center gap-2 group"
                   >
-                    <span className="text-cb-dim group-hover:text-cb-red transition-colors">//</span>
+                    <span className="text-cb-dim group-hover:text-cb-purple transition-colors">//</span>
                     {link.label}
                   </Link>
                 </li>
@@ -81,10 +85,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Services - SHARPER */}
+          {/* Services */}
           <div>
             <h3 className="text-cb-white font-bold uppercase tracking-widest text-sm mb-6 flex items-center gap-2">
-              <span className="w-2 h-2 bg-cb-red" />
+              <span className="w-2 h-2 bg-cb-purple" />
               SERVICES
             </h3>
             <ul className="space-y-3">
@@ -94,7 +98,7 @@ export default function Footer() {
                     href={link.href}
                     className="text-cb-muted hover:text-cb-white transition-colors text-sm uppercase tracking-wider flex items-center gap-2 group"
                   >
-                    <span className="text-cb-dim group-hover:text-cb-red transition-colors">//</span>
+                    <span className="text-cb-dim group-hover:text-cb-purple transition-colors">//</span>
                     {link.label}
                   </Link>
                 </li>
@@ -102,10 +106,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter - DARKER */}
+          {/* Newsletter */}
           <div>
             <h3 className="text-cb-white font-bold uppercase tracking-widest text-sm mb-6 flex items-center gap-2">
-              <Radio className="w-4 h-4 text-cb-red" />
+              <Radio className="w-4 h-4 text-cb-purple" />
               TRANSMISSIONS
             </h3>
             <p className="text-cb-muted text-sm mb-4">
@@ -115,7 +119,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="ENTER EMAIL"
-                className="px-4 py-3 bg-cb-gray border border-cb-concrete text-cb-white placeholder:text-cb-dim focus:outline-none focus:border-cb-red transition-colors text-sm uppercase tracking-wider"
+                className="px-4 py-3 bg-cb-gray border border-cb-concrete text-cb-white placeholder:text-cb-dim focus:outline-none focus:border-cb-purple transition-colors text-sm uppercase tracking-wider"
               />
               <button type="submit" className="btn-primary text-sm py-3">
                 SUBSCRIBE
@@ -124,16 +128,16 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar - SHARPER */}
+        {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-cb-concrete flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-cb-dim text-xs uppercase tracking-widest">
             © {new Date().getFullYear()} CIRCUIT BREAKER // ALL RIGHTS RESERVED
           </p>
           <div className="flex gap-8">
-            <Link href="/privacy" className="text-cb-dim hover:text-cb-red transition-colors text-xs uppercase tracking-widest">
+            <Link href="/privacy" className="text-cb-dim hover:text-cb-purple transition-colors text-xs uppercase tracking-widest">
               PRIVACY
             </Link>
-            <Link href="/terms" className="text-cb-dim hover:text-cb-red transition-colors text-xs uppercase tracking-widest">
+            <Link href="/terms" className="text-cb-dim hover:text-cb-purple transition-colors text-xs uppercase tracking-widest">
               TERMS
             </Link>
           </div>

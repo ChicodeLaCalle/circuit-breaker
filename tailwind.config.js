@@ -9,33 +9,37 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // DARKER Underground Industrial Palette
+        // DARK UNDERGROUND - Purple Dominant
         cb: {
+          // Deep Void
           black: '#000000',
-          void: '#050505',
-          abyss: '#0a0a0a',
-          dark: '#0f0f0f',
-          gray: '#141414',
-          concrete: '#1a1a1a',
-          steel: '#222222',
-          light: '#2a2a2a',
+          void: '#030303',
+          abyss: '#080808',
+          dark: '#0c0c0c',
           
-          // Electric Accents
-          red: '#ff0033',
-          'red-glow': '#ff003380',
-          'red-dark': '#990022',
+          // Purple Scale
+          purple: '#6b21a8',
+          'purple-light': '#8b5cf6',
+          'purple-dark': '#4c1d95',
+          'purple-deep': '#3b0764',
+          'purple-glow': 'rgba(107, 33, 168, 0.4)',
           
-          cyan: '#00ffff',
-          'cyan-glow': '#00ffff40',
+          // Accent Colors
+          violet: '#7c3aed',
+          indigo: '#4338ca',
+          magenta: '#a855f7',
           
-          magenta: '#ff00ff',
-          'magenta-glow': '#ff00ff40',
+          // Dark Grays
+          gray: '#0f0f0f',
+          concrete: '#141414',
+          steel: '#1a1a1a',
+          light: '#222222',
           
           // Text
-          white: '#ffffff',
-          'off-white': '#e0e0e0',
-          muted: '#666666',
-          dim: '#444444',
+          white: '#e0e0e0',
+          'off-white': '#a0a0a0',
+          muted: '#525252',
+          dim: '#333333',
         }
       },
       fontFamily: {
@@ -44,94 +48,69 @@ module.exports = {
         mono: ['var(--font-mono)', 'Courier New', 'monospace'],
       },
       animation: {
-        'glitch': 'glitch 1s linear infinite',
-        'glitch-fast': 'glitch 0.3s linear infinite',
-        'scan': 'scan 8s linear infinite',
-        'scan-fast': 'scan 2s linear infinite',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'pulse-electric': 'pulseElectric 2s ease-in-out infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'flicker': 'flicker 3s linear infinite',
-        'noise': 'noise 0.5s steps(10) infinite',
-        'vhs': 'vhs 4s ease-in-out infinite',
+        'pulse-purple': 'pulsePurple 3s ease-in-out infinite',
+        'float-slow': 'float 8s ease-in-out infinite',
+        'morph': 'morph 15s ease-in-out infinite',
+        'tentacle': 'tentacle 12s ease-in-out infinite',
+        'circuit': 'circuit 20s linear infinite',
+        'biomech': 'biomech 10s ease-in-out infinite',
+        'sigil-rotate': 'sigilRotate 30s linear infinite',
+        'pulse-glow': 'pulseGlow 4s ease-in-out infinite',
       },
       keyframes: {
-        glitch: {
-          '0%, 100%': { transform: 'translate(0)' },
-          '10%': { transform: 'translate(-3px, 3px)' },
-          '20%': { transform: 'translate(-3px, -3px)' },
-          '30%': { transform: 'translate(3px, 3px)' },
-          '40%': { transform: 'translate(3px, -3px)' },
-          '50%': { transform: 'translate(-3px, 3px)' },
-          '60%': { transform: 'translate(-3px, -3px)' },
-          '70%': { transform: 'translate(3px, 3px)' },
-          '80%': { transform: 'translate(3px, -3px)' },
-          '90%': { transform: 'translate(-3px, 3px)' },
-        },
-        scan: {
-          '0%': { backgroundPosition: '0% 0%' },
-          '100%': { backgroundPosition: '0% 100%' },
+        pulsePurple: {
+          '0%, 100%': { 
+            boxShadow: '0 0 20px rgba(107, 33, 168, 0.3), 0 0 40px rgba(107, 33, 168, 0.1)',
+            opacity: '0.8'
+          },
+          '50%': { 
+            boxShadow: '0 0 40px rgba(107, 33, 168, 0.6), 0 0 80px rgba(107, 33, 168, 0.3)',
+            opacity: '1'
+          },
         },
         float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-20px)' },
+          '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+          '50%': { transform: 'translateY(-30px) rotate(5deg)' },
         },
-        flicker: {
-          '0%, 100%': { opacity: 1 },
-          '41%': { opacity: 1 },
-          '42%': { opacity: 0.8 },
-          '43%': { opacity: 1 },
-          '45%': { opacity: 0.5 },
-          '46%': { opacity: 1 },
-          '47%': { opacity: 0.3 },
-          '48%': { opacity: 1 },
+        morph: {
+          '0%, 100%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
+          '25%': { borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%' },
+          '50%': { borderRadius: '50% 60% 30% 60% / 30% 60% 70% 40%' },
+          '75%': { borderRadius: '60% 40% 60% 30% / 70% 30% 50% 60%' },
         },
-        pulseElectric: {
-          '0%, 100%': { boxShadow: '0 0 20px #ff003380, 0 0 40px #ff003340' },
-          '50%': { boxShadow: '0 0 40px #ff0033, 0 0 80px #ff003380' },
+        tentacle: {
+          '0%, 100%': { transform: 'scale(1) rotate(0deg)', opacity: '0.3' },
+          '50%': { transform: 'scale(1.1) rotate(5deg)', opacity: '0.5' },
         },
-        noise: {
-          '0%, 100%': { transform: 'translate(0, 0)' },
-          '10%': { transform: 'translate(-5%, -5%)' },
-          '20%': { transform: 'translate(-10%, 5%)' },
-          '30%': { transform: 'translate(5%, -10%)' },
-          '40%': { transform: 'translate(-5%, 15%)' },
-          '50%': { transform: 'translate(-10%, 5%)' },
-          '60%': { transform: 'translate(15%, 0)' },
-          '70%': { transform: 'translate(0, 10%)' },
-          '80%': { transform: 'translate(-15%, 0)' },
-          '90%': { transform: 'translate(10%, 5%)' },
+        circuit: {
+          '0%': { strokeDashoffset: '1000' },
+          '100%': { strokeDashoffset: '0' },
         },
-        vhs: {
+        biomech: {
+          '0%, 100%': { transform: 'scale(1) translate(0, 0)' },
+          '25%': { transform: 'scale(1.05) translate(10px, -10px)' },
+          '50%': { transform: 'scale(1) translate(0, 0)' },
+          '75%': { transform: 'scale(1.05) translate(-10px, 10px)' },
+        },
+        sigilRotate: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        pulseGlow: {
           '0%, 100%': { 
-            transform: 'translate(0)',
-            filter: 'hue-rotate(0deg)'
+            filter: 'drop-shadow(0 0 20px rgba(107, 33, 168, 0.5))',
+            opacity: '0.6'
           },
-          '20%': { 
-            transform: 'translate(-2px, 2px)',
-            filter: 'hue-rotate(90deg)'
-          },
-          '40%': { 
-            transform: 'translate(2px, -2px)',
-            filter: 'hue-rotate(180deg)'
-          },
-          '60%': { 
-            transform: 'translate(-2px, -2px)',
-            filter: 'hue-rotate(270deg)'
-          },
-          '80%': { 
-            transform: 'translate(2px, 2px)',
-            filter: 'hue-rotate(360deg)'
+          '50%': { 
+            filter: 'drop-shadow(0 0 40px rgba(107, 33, 168, 0.8))',
+            opacity: '0.9'
           },
         },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-concrete': 'linear-gradient(180deg, #0f0f0f 0%, #000000 100%)',
-        'gradient-red': 'linear-gradient(135deg, #ff0033 0%, #990022 100%)',
-        'gradient-cyber': 'linear-gradient(135deg, #ff0033 0%, #ff00ff 50%, #00ffff 100%)',
-        'scan-lines': 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,0,51,0.03) 2px, rgba(255,0,51,0.03) 4px)',
-        'noise': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")",
+        'gradient-purple': 'linear-gradient(135deg, #3b0764 0%, #6b21a8 50%, #4c1d95 100%)',
+        'gradient-dark': 'linear-gradient(180deg, #080808 0%, #000000 100%)',
       },
     },
   },
