@@ -9,15 +9,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // DARK UNDERGROUND - Purple Dominant
+        // CYBERSIGILISM - Occult Purple Palette
         cb: {
-          // Deep Void
+          // Void
           black: '#000000',
-          void: '#030303',
-          abyss: '#080808',
-          dark: '#0c0c0c',
+          void: '#020202',
+          abyss: '#050505',
+          dark: '#080808',
           
-          // Purple Scale - BRIGHTER for visibility
+          // Purple Scale
           purple: '#9333ea',
           'purple-light': '#a855f7',
           'purple-bright': '#c084fc',
@@ -25,17 +25,16 @@ module.exports = {
           'purple-deep': '#3b0764',
           'purple-glow': 'rgba(147, 51, 234, 0.5)',
           
-          // Accent Colors
+          // Accent
           violet: '#8b5cf6',
-          'violet-light': '#a78bfa',
-          indigo: '#6366f1',
           magenta: '#d946ef',
+          indigo: '#6366f1',
           
-          // Dark Grays
-          gray: '#0f0f0f',
-          concrete: '#1a1a1a',
-          steel: '#262626',
-          light: '#333333',
+          // Grays
+          gray: '#0a0a0a',
+          concrete: '#111111',
+          steel: '#1a1a1a',
+          light: '#262626',
           
           // Text
           white: '#e0e0e0',
@@ -51,14 +50,10 @@ module.exports = {
       },
       animation: {
         'pulse-purple': 'pulsePurple 3s ease-in-out infinite',
-        'float-slow': 'float 8s ease-in-out infinite',
-        'morph': 'morph 15s ease-in-out infinite',
-        'tentacle': 'tentacle 12s ease-in-out infinite',
-        'circuit': 'circuit 20s linear infinite',
-        'biomech': 'biomech 10s ease-in-out infinite',
-        'sigil-rotate': 'sigilRotate 60s linear infinite',
-        'pulse-glow': 'pulseGlow 4s ease-in-out infinite',
-        'flow': 'flow 15s ease-in-out infinite',
+        'pulse-sigil': 'pulseSigil 4s ease-in-out infinite',
+        'float': 'float 6s ease-in-out infinite',
+        'glow': 'glow 2s ease-in-out infinite',
+        'rotate-slow': 'rotateSlow 60s linear infinite',
       },
       keyframes: {
         pulsePurple: {
@@ -71,53 +66,32 @@ module.exports = {
             opacity: '1'
           },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
-          '50%': { transform: 'translateY(-30px) rotate(5deg)' },
-        },
-        morph: {
-          '0%, 100%': { borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' },
-          '25%': { borderRadius: '30% 60% 70% 40% / 50% 60% 30% 60%' },
-          '50%': { borderRadius: '50% 60% 30% 60% / 30% 60% 70% 40%' },
-          '75%': { borderRadius: '60% 40% 60% 30% / 70% 30% 50% 60%' },
-        },
-        tentacle: {
-          '0%, 100%': { transform: 'scale(1) rotate(0deg)', opacity: '0.4' },
-          '50%': { transform: 'scale(1.1) rotate(5deg)', opacity: '0.7' },
-        },
-        circuit: {
-          '0%': { strokeDashoffset: '1000' },
-          '100%': { strokeDashoffset: '0' },
-        },
-        biomech: {
-          '0%, 100%': { transform: 'scale(1) translate(0, 0)' },
-          '25%': { transform: 'scale(1.05) translate(10px, -10px)' },
-          '50%': { transform: 'scale(1) translate(0, 0)' },
-          '75%': { transform: 'scale(1.05) translate(-10px, 10px)' },
-        },
-        sigilRotate: {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
-        },
-        pulseGlow: {
+        pulseSigil: {
           '0%, 100%': { 
-            filter: 'drop-shadow(0 0 30px rgba(147, 51, 234, 0.6))',
-            opacity: '0.7'
+            filter: 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.6))',
+            opacity: '0.8'
           },
           '50%': { 
-            filter: 'drop-shadow(0 0 50px rgba(147, 51, 234, 0.9))',
+            filter: 'drop-shadow(0 0 40px rgba(147, 51, 234, 0.9))',
             opacity: '1'
           },
         },
-        flow: {
-          '0%, 100%': { transform: 'translateX(0)' },
-          '50%': { transform: 'translateX(20px)' },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        glow: {
+          '0%, 100%': { opacity: '0.5' },
+          '50%': { opacity: '1' },
+        },
+        rotateSlow: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
         },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-purple': 'linear-gradient(135deg, #3b0764 0%, #9333ea 50%, #7c3aed 100%)',
-        'gradient-dark': 'linear-gradient(180deg, #080808 0%, #000000 100%)',
       },
     },
   },
