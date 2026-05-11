@@ -7,166 +7,252 @@ import { ArrowRight, Play, Radio } from 'lucide-react'
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-cb-black">
-      {/* CYBERSIGILISM BACKGROUND - OCCULT SYMBOLS */}
+      {/* CYBERSIGILISM BACKGROUND - ORGANIC BIOMECHANICAL PATTERNS */}
       <div className="absolute inset-0">
         
-        {/* Layer 1: Sacred Geometry Grid */}
-        <div 
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `
-              radial-gradient(circle at 50% 50%, transparent 0%, transparent 40%, rgba(147, 51, 234, 0.1) 40%, rgba(147, 51, 234, 0.1) 41%, transparent 41%),
-              radial-gradient(circle at 50% 50%, transparent 0%, transparent 30%, rgba(168, 85, 247, 0.15) 30%, rgba(168, 85, 247, 0.15) 31%, transparent 31%),
-              radial-gradient(circle at 50% 50%, transparent 0%, transparent 20%, rgba(139, 92, 246, 0.2) 20%, rgba(139, 92, 246, 0.2) 21%, transparent 21%)
-            `,
-            backgroundSize: '400px 400px',
-          }}
-        />
-
-        {/* Layer 2: Mystical Sigil Pattern */}
-        <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
+        {/* Layer 1: Organic Flowing Lines Background */}
+        <svg className="absolute inset-0 w-full h-full opacity-40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
           <defs>
-            <linearGradient id="sigilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#9333ea" stopOpacity="0.6" />
-              <stop offset="50%" stopColor="#a855f7" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#c084fc" stopOpacity="0.2" />
+            <linearGradient id="organicGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#9333ea" stopOpacity="0.8" />
+              <stop offset="50%" stopColor="#a855f7" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#c084fc" stopOpacity="0.3" />
             </linearGradient>
+            <linearGradient id="organicGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#a855f7" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#9333ea" stopOpacity="0.2" />
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
           </defs>
           
-          {/* Sigil 1: The All-Seeing Eye Cyber Variant */}
-          <g transform="translate(200, 150)" className="animate-pulse">
-            <path d="M0,0 L30,-20 L60,0 L30,20 Z" fill="none" stroke="url(#sigilGrad)" strokeWidth="2" />
-            <circle cx="30" cy="0" r="15" fill="none" stroke="#9333ea" strokeWidth="1.5" />
-            <circle cx="30" cy="0" r="5" fill="#9333ea" />
-            <path d="M0,0 Q30,-40 60,0 Q30,40 0,0" fill="none" stroke="#a855f7" strokeWidth="1" opacity="0.6" />
+          {/* Large Organic Pattern 1 - Flowing Biomechanical */}
+          <g transform="translate(150, 100) scale(1.5)" filter="url(#glow)">
+            {/* Main flowing spine */}
+            <path d="M0,50 Q30,20 60,50 T120,50 T180,40 T240,60" 
+                  fill="none" stroke="url(#organicGrad1)" strokeWidth="3" strokeLinecap="round">
+              <animate attributeName="stroke-dasharray" from="0,500" to="500,0" dur="8s" repeatCount="indefinite"/>
+            </path>
+            {/* Branching tendrils */}
+            <path d="M30,35 Q50,10 70,25 Q60,40 50,35" 
+                  fill="none" stroke="#a855f7" strokeWidth="2" strokeLinecap="round" opacity="0.8">
+              <animate attributeName="d" 
+                       values="M30,35 Q50,10 70,25 Q60,40 50,35;M30,35 Q45,15 65,20 Q55,45 50,35;M30,35 Q50,10 70,25 Q60,40 50,35" 
+                       dur="6s" repeatCount="indefinite"/>
+            </path>
+            <path d="M90,45 Q110,20 130,35 Q120,50 110,45" 
+                  fill="none" stroke="#9333ea" strokeWidth="2" strokeLinecap="round" opacity="0.8">
+              <animate attributeName="d" 
+                       values="M90,45 Q110,20 130,35 Q120,50 110,45;M90,45 Q105,25 125,30 Q115,55 110,45;M90,45 Q110,20 130,35 Q120,50 110,45" 
+                       dur="7s" repeatCount="indefinite"/>
+            </path>
+            <path d="M150,35 Q170,10 190,25 Q180,40 170,35" 
+                  fill="none" stroke="#c084fc" strokeWidth="2" strokeLinecap="round" opacity="0.8">
+              <animate attributeName="d" 
+                       values="M150,35 Q170,10 190,25 Q180,40 170,35;M150,35 Q165,15 185,20 Q175,45 170,35;M150,35 Q170,10 190,25 Q180,40 170,35" 
+                       dur="5s" repeatCount="indefinite"/>
+            </path>
+            {/* Organic dots/sensors */}
+            <circle cx="30" cy="35" r="4" fill="#9333ea">
+              <animate attributeName="r" values="4;6;4" dur="3s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="90" cy="45" r="3" fill="#a855f7">
+              <animate attributeName="r" values="3;5;3" dur="4s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="150" cy="35" r="4" fill="#c084fc">
+              <animate attributeName="r" values="4;6;4" dur="3.5s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="210" cy="50" r="3" fill="#9333ea">
+              <animate attributeName="r" values="3;5;3" dur="2.5s" repeatCount="indefinite"/>
+            </circle>
           </g>
 
-          {/* Sigil 2: Binding Circle */}
-          <g transform="translate(900, 200)" className="animate-pulse" style={{ animationDelay: '1s' }}>
-            <circle cx="0" cy="0" r="60" fill="none" stroke="#9333ea" strokeWidth="2" />
-            <circle cx="0" cy="0" r="45" fill="none" stroke="#a855f7" strokeWidth="1.5" />
-            <circle cx="0" cy="0" r="30" fill="none" stroke="#c084fc" strokeWidth="1" />
-            <path d="M-60,0 L60,0 M0,-60 L0,60 M-42,-42 L42,42 M-42,42 L42,-42" stroke="#9333ea" strokeWidth="1" />
-            <circle cx="0" cy="-60" r="4" fill="#a855f7" />
-            <circle cx="60" cy="0" r="4" fill="#a855f7" />
-            <circle cx="0" cy="60" r="4" fill="#a855f7" />
-            <circle cx="-60" cy="0" r="4" fill="#a855f7" />
+          {/* Large Organic Pattern 2 - Tribal Biomechanical */}
+          <g transform="translate(800, 150) scale(1.8)" filter="url(#glow)">
+            {/* Central spine with ribs */}
+            <path d="M0,0 Q20,-30 40,0 Q60,30 80,0 Q100,-30 120,0" 
+                  fill="none" stroke="url(#organicGrad2)" strokeWidth="4" strokeLinecap="round">
+              <animate attributeName="d" 
+                       values="M0,0 Q20,-30 40,0 Q60,30 80,0 Q100,-30 120,0;M0,0 Q25,-25 45,5 Q55,35 85,-5 Q95,-25 125,5;M0,0 Q20,-30 40,0 Q60,30 80,0 Q100,-30 120,0" 
+                       dur="10s" repeatCount="indefinite"/>
+            </path>
+            {/* Tribal spikes */}
+            <path d="M20,-15 L25,-35 L30,-15 M50,15 L55,40 L60,15 M90,-10 L95,-30 L100,-10" 
+                  fill="none" stroke="#a855f7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <animateTransform attributeName="transform" type="rotate" from="0 60 0" to="5 60 0" dur="8s" repeatCount="indefinite" additive="sum"/>
+            </path>
+            {/* Organic webbing */}
+            <path d="M10,-10 Q30,-20 50,-10 Q40,10 20,0 Q30,-15 10,-10" 
+                  fill="none" stroke="#9333ea" strokeWidth="1.5" opacity="0.7"/>
+            <path d="M70,5 Q90,-5 110,5 Q100,25 80,15 Q90,0 70,5" 
+                  fill="none" stroke="#c084fc" strokeWidth="1.5" opacity="0.7"/>
+            {/* Small tendrils */}
+            <path d="M40,-20 Q35,-40 45,-50 M80,20 Q85,45 75,55" 
+                  fill="none" stroke="#9333ea" strokeWidth="1.5" strokeLinecap="round">
+              <animate attributeName="d" 
+                       values="M40,-20 Q35,-40 45,-50 M80,20 Q85,45 75,55;M40,-20 Q30,-35 50,-45 M80,20 Q90,40 70,60;M40,-20 Q35,-40 45,-50 M80,20 Q85,45 75,55" 
+                       dur="6s" repeatCount="indefinite"/>
+            </path>
           </g>
 
-          {/* Sigil 3: The Gateway */}
-          <g transform="translate(150, 600)" className="animate-pulse" style={{ animationDelay: '2s' }}>
-            <path d="M0,-50 L43,-25 L43,25 L0,50 L-43,25 L-43,-25 Z" fill="none" stroke="#9333ea" strokeWidth="2" />
-            <path d="M0,-35 L30,-17.5 L30,17.5 L0,35 L-30,17.5 L-30,-17.5 Z" fill="none" stroke="#a855f7" strokeWidth="1.5" />
-            <path d="M0,-20 L17,-10 L17,10 L0,20 L-17,10 L-17,-10 Z" fill="none" stroke="#c084fc" strokeWidth="1" />
-            <circle cx="0" cy="0" r="8" fill="#9333ea" />
+          {/* Large Organic Pattern 3 - Flowing Veins */}
+          <g transform="translate(100, 500) scale(2)" filter="url(#glow)">
+            {/* Main vein */}
+            <path d="M0,0 C30,-20 60,-10 90,10 C120,30 150,20 180,0" 
+                  fill="none" stroke="url(#organicGrad1)" strokeWidth="5" strokeLinecap="round">
+              <animate attributeName="stroke-width" values="5;7;5" dur="4s" repeatCount="indefinite"/>
+            </path>
+            {/* Branching veins */}
+            <path d="M30,-5 Q45,-25 60,-20 Q50,0 40,-5" 
+                  fill="none" stroke="#a855f7" strokeWidth="2.5" strokeLinecap="round">
+              <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+            </path>
+            <path d="M90,5 Q105,-15 120,-10 Q110,10 100,5" 
+                  fill="none" stroke="#9333ea" strokeWidth="2.5" strokeLinecap="round">
+              <animate attributeName="opacity" values="0.6;1;0.6" dur="3.5s" repeatCount="indefinite"/>
+            </path>
+            <path d="M150,10 Q165,-10 180,-5 Q170,15 160,10" 
+                  fill="none" stroke="#c084fc" strokeWidth="2.5" strokeLinecap="round">
+              <animate attributeName="opacity" values="0.6;1;0.6" dur="4s" repeatCount="indefinite"/>
+            </path>
+            {/* Capillary details */}
+            <path d="M15,-5 L20,-15 M45,0 L50,-12 M75,5 L80,-8 M105,8 L110,-5 M135,5 L140,-10" 
+                  fill="none" stroke="#a855f7" strokeWidth="1" strokeLinecap="round" opacity="0.6"/>
+            {/* Nodes */}
+            <ellipse cx="30" cy="-5" rx="6" ry="4" fill="#9333ea" opacity="0.8">
+              <animate attributeName="rx" values="6;8;6" dur="3s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="90" cy="5" rx="5" ry="3" fill="#a855f7" opacity="0.8">
+              <animate attributeName="rx" values="5;7;5" dur="2.5s" repeatCount="indefinite"/>
+            </ellipse>
+            <ellipse cx="150" cy="10" rx="6" ry="4" fill="#c084fc" opacity="0.8">
+              <animate attributeName="rx" values="6;8;6" dur="3.5s" repeatCount="indefinite"/>
+            </ellipse>
           </g>
 
-          {/* Sigil 4: Runic Web */}
-          <g transform="translate(1000, 550)" className="animate-pulse" style={{ animationDelay: '0.5s' }}>
-            <path d="M0,0 L0,-80 M0,0 L69,-40 M0,0 L69,40 M0,0 L0,80 M0,0 L-69,40 M0,0 L-69,-40" 
-                  stroke="#9333ea" strokeWidth="2" />
-            <circle cx="0" cy="-80" r="6" fill="#a855f7" />
-            <circle cx="69" cy="-40" r="6" fill="#a855f7" />
-            <circle cx="69" cy="40" r="6" fill="#a855f7" />
-            <circle cx="0" cy="80" r="6" fill="#a855f7" />
-            <circle cx="-69" cy="40" r="6" fill="#a855f7" />
-            <circle cx="-69" cy="-40" r="6" fill="#a855f7" />
-            <circle cx="0" cy="0" r="15" fill="none" stroke="#c084fc" strokeWidth="2" />
+          {/* Pattern 4 - Intricate Tribal Web */}
+          <g transform="translate(700, 450) scale(1.6) rotate(45)" filter="url(#glow)">
+            {/* Web center */}
+            <circle cx="0" cy="0" r="30" fill="none" stroke="#9333ea" strokeWidth="2" strokeDasharray="5,5">
+              <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="20s" repeatCount="indefinite"/>
+            </circle>
+            {/* Radiating lines */}
+            <line x1="0" y1="-30" x2="0" y2="-80" stroke="#a855f7" strokeWidth="3" strokeLinecap="round">
+              <animate attributeName="y2" values="-80;-90;-80" dur="4s" repeatCount="indefinite"/>
+            </line>
+            <line x1="21" y1="-21" x2="56" y2="-56" stroke="#9333ea" strokeWidth="3" strokeLinecap="round"/>
+            <line x1="30" y1="0" x2="80" y2="0" stroke="#a855f7" strokeWidth="3" strokeLinecap="round"/>
+            <line x1="21" y1="21" x2="56" y2="56" stroke="#9333ea" strokeWidth="3" strokeLinecap="round"/>
+            <line x1="0" y1="30" x2="0" y2="80" stroke="#a855f7" strokeWidth="3" strokeLinecap="round"/>
+            <line x1="-21" y1="21" x2="-56" y2="56" stroke="#9333ea" strokeWidth="3" strokeLinecap="round"/>
+            <line x1="-30" y1="0" x2="-80" y2="0" stroke="#a855f7" strokeWidth="3" strokeLinecap="round"/>
+            <line x1="-21" y1="-21" x2="-56" y2="-56" stroke="#9333ea" strokeWidth="3" strokeLinecap="round"/>
+            {/* Decorative hooks */}
+            <path d="M0,-50 Q-10,-60 0,-70 Q10,-60 0,-50 M56,-56 Q66,-66 56,-76 Q46,-66 56,-56" 
+                  fill="none" stroke="#c084fc" strokeWidth="2" strokeLinecap="round">
+              <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="5s" repeatCount="indefinite"/>
+            </path>
+            {/* Center core */}
+            <circle cx="0" cy="0" r="8" fill="#9333ea">
+              <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
+            </circle>
           </g>
 
-          {/* Sigil 5: The Trinity Knot */}
-          <g transform="translate(600, 100)" className="animate-pulse" style={{ animationDelay: '1.5s' }}>
-            <path d="M0,-40 C20,-40 35,-25 35,-5 C35,15 20,30 0,30" fill="none" stroke="#9333ea" strokeWidth="2" />
-            <path d="M0,-40 C-20,-40 -35,-25 -35,-5 C-35,15 -20,30 0,30" fill="none" stroke="#9333ea" strokeWidth="2" />
-            <path d="M-30,25 C-15,40 15,40 30,25" fill="none" stroke="#9333ea" strokeWidth="2" />
-            <circle cx="0" cy="-40" r="5" fill="#a855f7" />
-            <circle cx="-30" cy="25" r="5" fill="#a855f7" />
-            <circle cx="30" cy="25" r="5" fill="#a855f7" />
-            <circle cx="0" cy="0" r="8" fill="#c084fc" />
+          {/* Pattern 5 - Organic Mandala */}
+          <g transform="translate(500, 350) scale(1.2)" filter="url(#glow)">
+            <defs>
+              <path id="petal" d="M0,-40 Q15,-20 0,0 Q-15,-20 0,-40" fill="none" stroke="#a855f7" strokeWidth="2"/>
+            </defs>
+            {[0,45,90,135,180,225,270,315].map((angle, i) => (
+              <use key={i} href="#petal" transform={`rotate(${angle})`}>
+                <animate attributeName="opacity" values="0.4;1;0.4" dur={`${3+i*0.2}s`} repeatCount="indefinite"/>
+              </use>
+            ))}
+            <circle cx="0" cy="0" r="20" fill="none" stroke="#9333ea" strokeWidth="2" strokeDasharray="3,3">
+              <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="-360 0 0" dur="15s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="0" cy="0" r="10" fill="#c084fc">
+              <animate attributeName="r" values="10;14;10" dur="3s" repeatCount="indefinite"/>
+            </circle>
           </g>
 
-          {/* Sigil 6: Digital Runes */}
-          <g transform="translate(1100, 400)" className="animate-pulse" style={{ animationDelay: '2.5s' }}>
-            <path d="M-20,-40 L-20,40 M-20,-20 L10,-40 L10,0 M-20,0 L10,20 L10,40" 
-                  stroke="#9333ea" strokeWidth="2.5" fill="none" />
-            <rect x="-25" y="-45" width="50" height="95" fill="none" stroke="#a855f7" strokeWidth="1" opacity="0.5" />
+          {/* Pattern 6 - Biomechanical Spine */}
+          <g transform="translate(1100, 100) scale(1.4) rotate(90)" filter="url(#glow)">
+            {/* Vertebrae */}
+            {[0, 40, 80, 120, 160].map((y, i) => (
+              <g key={i} transform={`translate(0, ${y})`}>
+                <ellipse cx="0" cy="0" rx="20" ry="12" fill="none" stroke="#9333ea" strokeWidth="2"/>
+                <ellipse cx="0" cy="0" rx="12" ry="7" fill="#a855f7" opacity="0.5">
+                  <animate attributeName="opacity" values="0.3;0.7;0.3" dur={`${2+i*0.3}s`} repeatCount="indefinite"/>
+                </ellipse>
+                {/* Spikes */}
+                <path d={`M-20,0 L-35,${-10 + i*2} L-20,-5 M20,0 L35,${-10 + i*2} L20,-5`} 
+                      fill="none" stroke="#c084fc" strokeWidth="1.5" strokeLinecap="round"/>
+              </g>
+            ))}
+            {/* Connecting tissue */}
+            <path d="M0,12 Q-15,20 0,28 Q15,36 0,44" fill="none" stroke="#a855f7" strokeWidth="1" opacity="0.6"/>
+            <path d="M0,52 Q-15,60 0,68 Q15,76 0,84" fill="none" stroke="#a855f7" strokeWidth="1" opacity="0.6"/>
+            <path d="M0,92 Q-15,100 0,108 Q15,116 0,124" fill="none" stroke="#a855f7" strokeWidth="1" opacity="0.6"/>
+            <path d="M0,132 Q-15,140 0,148 Q15,156 0,164" fill="none" stroke="#a855f7" strokeWidth="1" opacity="0.6"/>
           </g>
-
-          {/* Sigil 7: The Ouroboros Circuit */}
-          <g transform="translate(400, 750)" className="animate-pulse" style={{ animationDelay: '0.8s' }}>
-            <path d="M0,0 m-50,0 a50,50 0 1,0 100,0 a50,50 0 1,0 -100,0" 
-                  fill="none" stroke="#9333ea" strokeWidth="2" />
-            <path d="M0,0 m-35,0 a35,35 0 1,0 70,0 a35,35 0 1,0 -70,0" 
-                  fill="none" stroke="#a855f7" strokeWidth="1.5" />
-            <path d="M50,0 L60,-10 L70,0 L60,10 Z" fill="#c084fc" />
-            <circle cx="0" cy="0" r="10" fill="#9333ea" />
-          </g>
-
-          {/* Connecting Lines - The Web */}
-          <path d="M200,150 Q550,125 900,200" fill="none" stroke="#9333ea" strokeWidth="0.5" opacity="0.3" />
-          <path d="M900,200 Q800,375 1000,550" fill="none" stroke="#a855f7" strokeWidth="0.5" opacity="0.3" />
-          <path d="M1000,550 Q500,550 400,750" fill="none" stroke="#9333ea" strokeWidth="0.5" opacity="0.3" />
-          <path d="M400,750 Q300,400 150,600" fill="none" stroke="#a855f7" strokeWidth="0.5" opacity="0.3" />
-          <path d="M600,100 Q400,400 200,150" fill="none" stroke="#c084fc" strokeWidth="0.5" opacity="0.3" />
         </svg>
 
-        {/* Layer 3: Runic Alphabet Pattern */}
-        <div 
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `
-              repeating-linear-gradient(0deg, transparent, transparent 100px, rgba(147, 51, 234, 0.1) 100px, rgba(147, 51, 234, 0.1) 101px),
-              repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(147, 51, 234, 0.1) 100px, rgba(147, 51, 234, 0.1) 101px)
-            `,
-          }}
-        />
+        {/* Layer 2: Connecting Energy Threads */}
+        <svg className="absolute inset-0 w-full h-full opacity-30" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="threadGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#9333ea" stopOpacity="0" />
+              <stop offset="50%" stopColor="#a855f7" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#c084fc" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          {/* Flowing threads between patterns */}
+          <path d="M200,200 Q400,150 600,250 T1000,200" 
+                fill="none" stroke="url(#threadGrad)" strokeWidth="1" opacity="0.5">
+            <animate attributeName="stroke-dasharray" from="0,1000" to="1000,0" dur="10s" repeatCount="indefinite"/>
+          </path>
+          <path d="M150,600 Q350,500 550,600 T950,500" 
+                fill="none" stroke="url(#threadGrad)" strokeWidth="1" opacity="0.5">
+            <animate attributeName="stroke-dasharray" from="0,1000" to="1000,0" dur="12s" repeatCount="indefinite"/>
+          </path>
+          <path d="M800,200 Q900,350 800,500 T900,700" 
+                fill="none" stroke="url(#threadGrad)" strokeWidth="1" opacity="0.5">
+            <animate attributeName="stroke-dasharray" from="0,1000" to="1000,0" dur="8s" repeatCount="indefinite"/>
+          </path>
+        </svg>
 
-        {/* Layer 4: Occult Symbols Overlay */}
-        <svg className="absolute inset-0 w-full h-full opacity-15" xmlns="http://www.w3.org/2000/svg">
-          {/* Pentagram Variants */}
-          <g transform="translate(300, 300)">
-            <path d="M0,-30 L9,-9 L30,-9 L14,6 L19,27 L0,15 L-19,27 L-14,6 L-30,-9 L-9,-9 Z" 
-                  fill="none" stroke="#9333ea" strokeWidth="1" />
-            <circle cx="0" cy="0" r="20" fill="none" stroke="#a855f7" strokeWidth="0.5" />
-          </g>
+        {/* Layer 3: Fine Detail Lines */}
+        <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
+          {/* Random organic strokes */}
+          <path d="M50,100 Q80,80 100,100 T150,90" fill="none" stroke="#9333ea" strokeWidth="0.5"/>
+          <path d="M300,400 Q330,380 360,400 T420,390" fill="none" stroke="#a855f7" strokeWidth="0.5"/>
+          <path d="M900,300 Q930,280 960,300 T1020,290" fill="none" stroke="#9333ea" strokeWidth="0.5"/>
+          <path d="M100,700 Q130,680 160,700 T220,690" fill="none" stroke="#a855f7" strokeWidth="0.5"/>
           
-          <g transform="translate(800, 600)">
-            <path d="M0,-40 L12,-12 L40,-12 L19,8 L25,36 L0,20 L-25,36 L-19,8 L-40,-12 L-12,-12 Z" 
-                  fill="none" stroke="#9333ea" strokeWidth="1" />
-            <circle cx="0" cy="0" r="25" fill="none" stroke="#a855f7" strokeWidth="0.5" />
-          </g>
-
-          {/* Cross Variants */}
-          <g transform="translate(500, 450)">
-            <path d="M0,-30 L0,30 M-20,0 L20,0 M-15,-15 L15,15 M-15,15 L15,-15" 
-                  stroke="#a855f7" strokeWidth="1" />
-            <circle cx="0" cy="0" r="35" fill="none" stroke="#9333ea" strokeWidth="0.5" />
-          </g>
-
-          {/* Eye of Providence */}
-          <g transform="translate(700, 300)">
-            <path d="M0,-15 Q20,0 0,15 Q-20,0 0,-15" fill="none" stroke="#c084fc" strokeWidth="1.5" />
-            <circle cx="0" cy="0" r="5" fill="#9333ea" />
-            <path d="M-25,-20 L25,-20 L0,-35 Z" fill="none" stroke="#a855f7" strokeWidth="0.5" />
-          </g>
-
-          {/* Alchemical Symbols */}
-          <g transform="translate(100, 400)">
-            <path d="M-20,-20 L20,20 M20,-20 L-20,20 M0,-25 L0,25" stroke="#9333ea" strokeWidth="1.5" />
-            <circle cx="0" cy="0" r="18" fill="none" stroke="#a855f7" strokeWidth="0.5" />
+          {/* Small sigil marks */}
+          <g opacity="0.6">
+            <path d="M100,200 L110,185 L120,200 L110,215 Z" fill="none" stroke="#c084fc" strokeWidth="1"/>
+            <path d="M400,150 L410,135 L420,150 L410,165 Z" fill="none" stroke="#c084fc" strokeWidth="1"/>
+            <path d="M800,450 L810,435 L820,450 L810,465 Z" fill="none" stroke="#c084fc" strokeWidth="1"/>
           </g>
         </svg>
 
-        {/* Layer 5: Glowing Orbs */}
-        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-cb-purple/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-cb-violet/15 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cb-magenta/10 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '4s' }} />
+        {/* Layer 4: Ambient Glow Orbs */}
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-gradient-radial from-cb-purple/25 via-cb-purple/10 to-transparent rounded-full blur-[100px] animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/3 w-[400px] h-[400px] bg-gradient-radial from-cb-violet/20 via-cb-violet/8 to-transparent rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '3s' }} />
+        <div className="absolute top-2/3 left-2/3 w-[450px] h-[450px] bg-gradient-radial from-cb-magenta/15 via-cb-magenta/5 to-transparent rounded-full blur-[90px] animate-pulse" style={{ animationDelay: '6s' }} />
         
-        {/* Vignette */}
+        {/* Vignette Overlay */}
         <div 
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: 'radial-gradient(ellipse at center, transparent 0%, #000000 90%)'
+            background: 'radial-gradient(ellipse at center, transparent 0%, #000000 95%)'
           }}
         />
       </div>
