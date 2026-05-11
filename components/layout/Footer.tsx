@@ -41,10 +41,10 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <Zap className="w-6 h-6 text-cb-purple drop-shadow-[0_0_10px_rgba(107,33,168,0.8)]" />
-              <span className="font-[family-name:var(--font-space)] text-xl font-bold tracking-tighter uppercase">
-                <span className="text-cb-white">CIRCUIT</span>
-                <span className="text-cb-purple glow-purple">BREAKER</span>
+              <Zap className="w-5 h-5 text-cb-purple drop-shadow-[0_0_10px_rgba(147,51,234,0.8)]" />
+              <span className="font-[family-name:var(--font-gothic)] text-xl leading-none">
+                <span className="text-cb-white">Circuit</span>
+                <span className="text-cb-purple glow-purple">Breaker</span>
               </span>
             </Link>
             <p className="text-cb-muted text-sm mb-8 leading-relaxed">

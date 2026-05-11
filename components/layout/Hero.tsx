@@ -139,19 +139,19 @@ export default function Hero() {
             </span>
           </motion.div>
 
-          {/* Main Headline */}
+          {/* Main Headline - GOTHIC BLACKLETTER FONT */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="mb-8"
           >
-            <h1 className="font-[family-name:var(--font-space)] text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-none">
-              <span className="block text-cb-white drop-shadow-[0_0_30px_rgba(255,255,255,0.05)]">
-                CIRCUIT
+            <h1 className="font-[family-name:var(--font-gothic)] text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-none tracking-normal">
+              <span className="block text-cb-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                Circuit
               </span>
-              <span className="block text-cb-purple glow-purple relative">
-                BREAKER
+              <span className="block text-cb-purple glow-purple relative -mt-4 sm:-mt-8">
+                Breaker
               </span>
             </h1>
           </motion.div>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, Space_Grotesk, UnifrakturMaguntia } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ 
@@ -11,6 +11,13 @@ const inter = Inter({
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space',
+  display: 'swap',
+})
+
+const unifraktur = UnifrakturMaguntia({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-gothic',
   display: 'swap',
 })
 
@@ -32,7 +39,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${unifraktur.variable} font-sans`}>
         {children}
       </body>
     </html>

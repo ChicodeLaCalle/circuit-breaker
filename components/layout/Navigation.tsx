@@ -23,12 +23,12 @@ export default function Navigation() {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo - PURPLE */}
+          {/* Logo - GOTHIC BLACKLETTER */}
           <Link href="/" className="flex items-center gap-2 group">
-            <Zap className="w-7 h-7 text-cb-purple group-hover:animate-pulse drop-shadow-[0_0_10px_rgba(107,33,168,0.8)]" />
-            <span className="font-[family-name:var(--font-space)] text-xl font-bold tracking-tighter uppercase">
-              <span className="text-cb-white">CIRCUIT</span>
-              <span className="text-cb-purple glow-purple">BREAKER</span>
+            <Zap className="w-6 h-6 text-cb-purple group-hover:animate-pulse drop-shadow-[0_0_10px_rgba(147,51,234,0.8)]" />
+            <span className="font-[family-name:var(--font-gothic)] text-2xl leading-none">
+              <span className="text-cb-white">Circuit</span>
+              <span className="text-cb-purple glow-purple">Breaker</span>
             </span>
           </Link>
 
