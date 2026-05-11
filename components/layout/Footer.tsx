@@ -1,5 +1,35 @@
 import Link from 'next/link'
-import { Zap, Instagram, Youtube, Mail, Radio } from 'lucide-react'
+import { Instagram, Youtube, Mail, Radio } from 'lucide-react'
+
+// Custom Sigil Logo Component
+const SigilLogo = ({ className }: { className?: string }) => (
+  <svg 
+    viewBox="0 0 40 40" 
+    className={className}
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path 
+      d="M20 2 L36 11 L36 29 L20 38 L4 29 L4 11 Z" 
+      stroke="currentColor" 
+      strokeWidth="2"
+      fill="none"
+    />
+    <path 
+      d="M20 8 L26 16 L20 32 L14 16 Z" 
+      stroke="currentColor" 
+      strokeWidth="1.5"
+      fill="none"
+    />
+    <circle cx="20" cy="20" r="3" fill="currentColor" />
+    <path 
+      d="M20 2 L20 8 M36 11 L26 16 M36 29 L20 32 M20 38 L14 16 M4 29 L20 20 M4 11 L26 16" 
+      stroke="currentColor" 
+      strokeWidth="0.5"
+      opacity="0.5"
+    />
+  </svg>
+)
 
 const footerLinks = {
   navigation: [
@@ -40,8 +70,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-6">
-              <Zap className="w-5 h-5 text-cb-purple drop-shadow-[0_0_10px_rgba(147,51,234,0.8)]" />
+            <Link href="/" className="flex items-center gap-3 mb-6">
+              <SigilLogo className="w-7 h-7 text-cb-purple drop-shadow-[0_0_10px_rgba(147,51,234,0.8)]" />
               <span className="font-[family-name:var(--font-gothic)] text-xl leading-none">
                 <span className="text-cb-white">Circuit</span>
                 <span className="text-cb-purple glow-purple">Breaker</span>
