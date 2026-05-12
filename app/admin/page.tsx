@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Disc3, Lock, Mail, Eye, EyeOff } from 'lucide-react'
 
 export default function AdminLoginPage() {
@@ -11,6 +12,7 @@ export default function AdminLoginPage() {
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const supabase = createClientComponentClient()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -18,37 +20,33 @@ export default function AdminLoginPage() {
     setIsLoading(true)
 
     try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       })
 
-      if (res.ok) {
-        router.push('/admin/dashboard')
-        router.refresh()
-      } else {
-        const data = await res.json()
-        setError(data.message || 'Invalid credentials')
+      if (signInError) {
+        setError('Invalid credentials')
+        setIsLoading(false)
+        return
       }
+
+      router.push('/admin/dashboard')
+      router.refresh()
     } catch (err) {
       setError('An error occurred. Please try again.')
-    } finally {
       setIsLoading(false)
     }
   }
 
   return (
     <div className="min-h-screen bg-cb-black flex items-center justify-center p-4">
-      {/* Background Effects */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-cb-purple/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-cb-violet/5 rounded-full blur-[120px]" />
       </div>
 
-      {/* Login Card */}
       <div className="relative w-full max-w-md">
-        {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-cb-purple/10 border border-cb-purple/30 rounded-full mb-4">
             <Disc3 className="w-8 h-8 text-cb-purple" />
@@ -59,9 +57,7 @@ export default function AdminLoginPage() {
           <p className="text-cb-muted">Admin Panel</p>
         </div>
 
-        {/* Login Form */}
         <div className="bg-cb-abyss border border-cb-concrete p-8 relative">
-          {/* Corner Accents */}
           <div className="absolute top-0 left-0 w-6 h-6 border-l-2 border-t-2 border-cb-purple" />
           <div className="absolute top-0 right-0 w-6 h-6 border-r-2 border-t-2 border-cb-purple" />
           <div className="absolute bottom-0 left-0 w-6 h-6 border-l-2 border-b-2 border-cb-purple" />
@@ -78,7 +74,6 @@ export default function AdminLoginPage() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email */}
             <div>
               <label className="block text-xs uppercase tracking-wider text-cb-muted mb-2">
                 Email Address
@@ -97,7 +92,6 @@ export default function AdminLoginPage() {
               </div>
             </div>
 
-            {/* Password */}
             <div>
               <label className="block text-xs uppercase tracking-wider text-cb-muted mb-2">
                 Password
@@ -123,7 +117,6 @@ export default function AdminLoginPage() {
               </div>
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={isLoading}
@@ -147,7 +140,6 @@ export default function AdminLoginPage() {
           </div>
         </div>
 
-        {/* Footer */}
         <p className="text-center text-cb-dim text-xs mt-8">
           Circuit Breaker Admin Panel • Secure Access Only
         </p>

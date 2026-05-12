@@ -1,29 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server'
-import jwt from 'jsonwebtoken'
-
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production'
+import { supabaseAdmin } from '@/lib/supabase'
 
 export async function GET(req: NextRequest) {
   try {
-    const token = req.cookies.get('admin-token')?.value
+    const accessToken = req.cookies.get('sb-access-token')?.value
 
-    if (!token) {
+    if (!accessToken) {
       return NextResponse.json(
         { message: 'Not authenticated' },
         { status: 401 }
       )
     }
 
-    // Verify token
-    jwt.verify(token, JWT_SECRET)
+    // Verify session with Supabase
+    const { data: { user }, error } = await supabaseAdmin.auth.getUser(accessToken)
+
+    if (error || !user) {
+      return NextResponse.json(
+        { message: 'Invalid session' },
+        { status: 401 }
+      )
+    }
 
     return NextResponse.json(
-      { message: 'Authenticated' },
+      { message: 'Authenticated', user },
       { status: 200 }
     )
   } catch (error) {
     return NextResponse.json(
-      { message: 'Invalid token' },
+      { message: 'Authentication check failed' },
       { status: 401 }
     )
   }

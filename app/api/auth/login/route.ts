@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
-import connectDB from '@/lib/mongodb'
-import { User } from '@/lib/models'
-
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production'
+import { supabaseAdmin } from '@/lib/supabase'
 
 export async function POST(req: NextRequest) {
   try {
@@ -17,54 +12,37 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    await connectDB()
+    // Sign in with Supabase Auth
+    const { data, error } = await supabaseAdmin.auth.signInWithPassword({
+      email,
+      password,
+    })
 
-    // Find user by email
-    const user = await User.findOne({ email })
-
-    if (!user) {
+    if (error || !data.session) {
       return NextResponse.json(
         { message: 'Invalid credentials' },
         { status: 401 }
       )
     }
 
-    // Verify password
-    const isValid = await bcrypt.compare(password, user.password)
-
-    if (!isValid) {
-      return NextResponse.json(
-        { message: 'Invalid credentials' },
-        { status: 401 }
-      )
-    }
-
-    // Update last login
-    user.lastLogin = new Date()
-    await user.save()
-
-    // Generate JWT token
-    const token = jwt.sign(
-      { 
-        userId: user._id,
-        email: user.email,
-        role: user.role 
-      },
-      JWT_SECRET,
-      { expiresIn: '7d' }
-    )
-
-    // Set cookie
+    // Set cookie with Supabase session
     const response = NextResponse.json(
       { message: 'Login successful' },
       { status: 200 }
     )
 
-    response.cookies.set('admin-token', token, {
+    response.cookies.set('sb-access-token', data.session.access_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60, // 7 days
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+    })
+
+    response.cookies.set('sb-refresh-token', data.session.refresh_token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 60 * 60 * 24 * 7,
     })
 
     return response

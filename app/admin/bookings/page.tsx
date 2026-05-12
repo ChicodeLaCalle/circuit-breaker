@@ -1,18 +1,37 @@
-import connectDB from '@/lib/mongodb'
-import { Booking } from '@/lib/models'
-import { Calendar, Search, Check, X, Clock, ExternalLink } from 'lucide-react'
+'use client'
 
-async function getBookings() {
-  await connectDB()
-  const bookings = await Booking.find()
-    .populate('artistId', 'name')
-    .sort({ createdAt: -1 })
-    .limit(50)
-  return JSON.parse(JSON.stringify(bookings))
-}
+import { useEffect, useState } from 'react'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { Calendar, Search, Check, X, ExternalLink } from 'lucide-react'
 
-export default async function AdminBookingsPage() {
-  const bookings = await getBookings()
+export default function AdminBookingsPage() {
+  const [bookings, setBookings] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const supabase = createClientComponentClient()
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('bookings')
+          .select(`
+            *,
+            artists (name)
+          `)
+          .order('created_at', { ascending: false })
+          .limit(50)
+
+        if (error) throw error
+        setBookings(data || [])
+      } catch (error) {
+        console.error('Error fetching bookings:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchBookings()
+  }, [supabase])
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -24,25 +43,32 @@ export default async function AdminBookingsPage() {
     }
   }
 
+  const stats = {
+    pending: bookings.filter(b => b.status === 'pending').length,
+    confirmed: bookings.filter(b => b.status === 'confirmed').length,
+    completed: bookings.filter(b => b.status === 'completed').length,
+    declined: bookings.filter(b => b.status === 'declined').length,
+  }
+
+  if (isLoading) {
+    return <div className="text-cb-muted">Loading...</div>
+  }
+
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div>
         <h1 className="font-[family-name:var(--font-gothic)] text-3xl text-cb-white mb-2">
           Booking Requests
         </h1>
-        <p className="text-cb-muted">
-          Manage and respond to booking inquiries
-        </p>
+        <p className="text-cb-muted">Manage and respond to booking inquiries</p>
       </div>
 
-      {/* Stats */}
       <div className="grid sm:grid-cols-4 gap-4">
         {[
-          { label: 'Pending', value: bookings.filter((b: any) => b.status === 'pending').length, color: 'text-yellow-400' },
-          { label: 'Confirmed', value: bookings.filter((b: any) => b.status === 'confirmed').length, color: 'text-green-400' },
-          { label: 'Completed', value: bookings.filter((b: any) => b.status === 'completed').length, color: 'text-blue-400' },
-          { label: 'Declined', value: bookings.filter((b: any) => b.status === 'declined').length, color: 'text-red-400' },
+          { label: 'Pending', value: stats.pending, color: 'text-yellow-400' },
+          { label: 'Confirmed', value: stats.confirmed, color: 'text-green-400' },
+          { label: 'Completed', value: stats.completed, color: 'text-blue-400' },
+          { label: 'Declined', value: stats.declined, color: 'text-red-400' },
         ].map((stat) => (
           <div key={stat.label} className="bg-cb-abyss border border-cb-concrete p-4 text-center">
             <div className={`text-2xl font-black ${stat.color}`}>{stat.value}</div>
@@ -51,7 +77,6 @@ export default async function AdminBookingsPage() {
         ))}
       </div>
 
-      {/* Filters */}
       <div className="flex items-center gap-4">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-cb-dim" />
@@ -71,7 +96,6 @@ export default async function AdminBookingsPage() {
         </select>
       </div>
 
-      {/* Bookings Table */}
       <div className="bg-cb-abyss border border-cb-concrete overflow-hidden">
         {bookings.length === 0 ? (
           <div className="p-12 text-center">
@@ -85,47 +109,33 @@ export default async function AdminBookingsPage() {
           <table className="w-full">
             <thead className="bg-cb-black/50 border-b border-cb-concrete">
               <tr>
-                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">
-                  Event
-                </th>
-                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">
-                  Artist
-                </th>
-                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">
-                  Date
-                </th>
-                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">
-                  Contact
-                </th>
-                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">
-                  Status
-                </th>
-                <th className="text-right text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">
-                  Actions
-                </th>
+                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">Event</th>
+                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">Artist</th>
+                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">Date</th>
+                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">Contact</th>
+                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">Status</th>
+                <th className="text-right text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-cb-concrete">
-              {bookings.map((booking: any) => (
-                <tr key={booking._id} className="hover:bg-cb-black/30 transition-colors">
+              {bookings.map((booking) => (
+                <tr key={booking.id} className="hover:bg-cb-black/30 transition-colors">
                   <td className="px-6 py-4">
                     <div>
-                      <p className="text-cb-white font-medium">{booking.eventName}</p>
+                      <p className="text-cb-white font-medium">{booking.event_name}</p>
                       <p className="text-cb-dim text-sm">{booking.location}</p>
                     </div>
                   </td>
                   <td className="px-6 py-4">
-                    <span className="text-cb-purple">
-                      {booking.artistId?.name || 'Unknown'}
-                    </span>
+                    <span className="text-cb-purple">{booking.artists?.name || 'Unknown'}</span>
                   </td>
                   <td className="px-6 py-4 text-cb-muted text-sm">
-                    {new Date(booking.eventDate).toLocaleDateString()}
+                    {new Date(booking.event_date).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4">
                     <div>
-                      <p className="text-cb-white text-sm">{booking.contactName}</p>
-                      <p className="text-cb-dim text-xs">{booking.contactEmail}</p>
+                      <p className="text-cb-white text-sm">{booking.contact_name}</p>
+                      <p className="text-cb-dim text-xs">{booking.contact_email}</p>
                     </div>
                   </td>
                   <td className="px-6 py-4">

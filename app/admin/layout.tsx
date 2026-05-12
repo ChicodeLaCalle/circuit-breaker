@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { 
   LayoutDashboard, 
   Newspaper, 
@@ -11,7 +12,6 @@ import {
   Settings, 
   LogOut,
   Menu,
-  X,
   Disc3
 } from 'lucide-react'
 
@@ -29,16 +29,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
+  const supabase = createClientComponentClient()
 
   useEffect(() => {
-    // Check if user is authenticated
     const checkAuth = async () => {
       try {
-        const res = await fetch('/api/auth/check')
-        if (res.ok) {
+        const { data: { session } } = await supabase.auth.getSession()
+        
+        if (session) {
           setIsAuthenticated(true)
         } else {
-          // Redirect to login if not authenticated and not already on login page
           if (pathname !== '/admin') {
             router.push('/admin')
           }
@@ -51,18 +51,30 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     }
 
     checkAuth()
-  }, [pathname, router])
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_OUT') {
+        setIsAuthenticated(false)
+        router.push('/admin')
+      } else if (session) {
+        setIsAuthenticated(true)
+      }
+    })
+
+    return () => subscription.unsubscribe()
+  }, [pathname, router, supabase])
 
   const handleLogout = async () => {
     try {
       await fetch('/api/auth/logout', { method: 'POST' })
+      await supabase.auth.signOut()
       router.push('/admin')
     } catch (error) {
       console.error('Logout failed:', error)
     }
   }
 
-  // Show loading while checking auth
   if (isLoading) {
     return (
       <div className="min-h-screen bg-cb-black flex items-center justify-center">
@@ -74,19 +86,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     )
   }
 
-  // Show login page if not authenticated
   if (!isAuthenticated && pathname === '/admin') {
     return children
   }
 
-  // Show login redirect if not authenticated and trying to access other admin pages
   if (!isAuthenticated) {
     return null
   }
 
   return (
     <div className="min-h-screen bg-cb-black flex">
-      {/* Mobile Sidebar Overlay */}
       {sidebarOpen && (
         <div 
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
@@ -94,13 +103,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         />
       )}
 
-      {/* Sidebar */}
       <aside className={`
         fixed lg:static inset-y-0 left-0 z-50 w-64 bg-cb-abyss border-r border-cb-concrete
         transform transition-transform duration-300 lg:transform-none
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
-        {/* Logo */}
         <div className="h-16 flex items-center px-6 border-b border-cb-concrete">
           <Link href="/admin/dashboard" className="flex items-center gap-3">
             <Disc3 className="w-6 h-6 text-cb-purple" />
@@ -110,7 +117,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </Link>
         </div>
 
-        {/* Navigation */}
         <nav className="p-4 space-y-1">
           {navItems.map((item) => {
             const Icon = item.icon
@@ -135,7 +141,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           })}
         </nav>
 
-        {/* Bottom Actions */}
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-cb-concrete">
           <Link 
             href="/" 
@@ -154,9 +159,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         </div>
       </aside>
 
-      {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Mobile Header */}
         <header className="lg:hidden h-16 bg-cb-abyss border-b border-cb-concrete flex items-center px-4">
           <button
             onClick={() => setSidebarOpen(true)}
@@ -169,7 +172,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </span>
         </header>
 
-        {/* Page Content */}
         <main className="flex-1 overflow-auto p-6 lg:p-8">
           {children}
         </main>

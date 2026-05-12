@@ -1,19 +1,41 @@
-import connectDB from '@/lib/mongodb'
-import { News } from '@/lib/models'
+'use client'
+
+import { useEffect, useState } from 'react'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Newspaper, Plus, Search, Edit2, Trash2, Eye } from 'lucide-react'
 
-async function getNews() {
-  await connectDB()
-  const news = await News.find().sort({ createdAt: -1 }).limit(20)
-  return JSON.parse(JSON.stringify(news))
-}
+export default function AdminNewsPage() {
+  const [news, setNews] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const supabase = createClientComponentClient()
 
-export default async function AdminNewsPage() {
-  const news = await getNews()
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('news')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(20)
+
+        if (error) throw error
+        setNews(data || [])
+      } catch (error) {
+        console.error('Error fetching news:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchNews()
+  }, [supabase])
+
+  if (isLoading) {
+    return <div className="text-cb-muted">Loading...</div>
+  }
 
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="font-[family-name:var(--font-gothic)] text-3xl text-cb-white mb-2">
@@ -32,7 +54,6 @@ export default async function AdminNewsPage() {
         </a>
       </div>
 
-      {/* Search & Filter */}
       <div className="flex items-center gap-4">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-cb-dim" />
@@ -53,7 +74,6 @@ export default async function AdminNewsPage() {
         </select>
       </div>
 
-      {/* Articles Table */}
       <div className="bg-cb-abyss border border-cb-concrete overflow-hidden">
         {news.length === 0 ? (
           <div className="p-12 text-center">
@@ -74,32 +94,20 @@ export default async function AdminNewsPage() {
           <table className="w-full">
             <thead className="bg-cb-black/50 border-b border-cb-concrete">
               <tr>
-                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">
-                  Title
-                </th>
-                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">
-                  Category
-                </th>
-                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">
-                  Status
-                </th>
-                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">
-                  Date
-                </th>
-                <th className="text-right text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">
-                  Actions
-                </th>
+                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">Title</th>
+                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">Category</th>
+                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">Status</th>
+                <th className="text-left text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">Date</th>
+                <th className="text-right text-xs uppercase tracking-wider text-cb-muted font-medium px-6 py-4">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-cb-concrete">
-              {news.map((article: any) => (
-                <tr key={article._id} className="hover:bg-cb-black/30 transition-colors">
+              {news.map((article) => (
+                <tr key={article.id} className="hover:bg-cb-black/30 transition-colors">
                   <td className="px-6 py-4">
                     <div>
                       <p className="text-cb-white font-medium">{article.title}</p>
-                      <p className="text-cb-dim text-sm truncate max-w-xs">
-                        {article.excerpt}
-                      </p>
+                      <p className="text-cb-dim text-sm truncate max-w-xs">{article.excerpt}</p>
                     </div>
                   </td>
                   <td className="px-6 py-4">
@@ -117,7 +125,7 @@ export default async function AdminNewsPage() {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-cb-muted text-sm">
-                    {new Date(article.createdAt).toLocaleDateString()}
+                    {new Date(article.created_at).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center justify-end gap-2">

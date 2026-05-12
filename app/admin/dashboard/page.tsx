@@ -1,5 +1,7 @@
-import connectDB from '@/lib/mongodb'
-import { News, Artist, Booking } from '@/lib/models'
+'use client'
+
+import { useEffect, useState } from 'react'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { 
   LayoutDashboard, 
   Newspaper, 
@@ -9,26 +11,46 @@ import {
   Clock
 } from 'lucide-react'
 
-async function getStats() {
-  await connectDB()
-  
-  const [totalNews, totalArtists, totalBookings, pendingBookings] = await Promise.all([
-    News.countDocuments(),
-    Artist.countDocuments(),
-    Booking.countDocuments(),
-    Booking.countDocuments({ status: 'pending' }),
-  ])
+export default function AdminDashboardPage() {
+  const [stats, setStats] = useState({
+    totalNews: 0,
+    totalArtists: 0,
+    totalBookings: 0,
+    pendingBookings: 0,
+  })
+  const [isLoading, setIsLoading] = useState(true)
+  const supabase = createClientComponentClient()
 
-  return {
-    totalNews,
-    totalArtists,
-    totalBookings,
-    pendingBookings,
-  }
-}
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const [
+          { count: newsCount },
+          { count: artistsCount },
+          { count: bookingsCount },
+          { count: pendingCount }
+        ] = await Promise.all([
+          supabase.from('news').select('*', { count: 'exact', head: true }),
+          supabase.from('artists').select('*', { count: 'exact', head: true }),
+          supabase.from('bookings').select('*', { count: 'exact', head: true }),
+          supabase.from('bookings').select('*', { count: 'exact', head: true }).eq('status', 'pending'),
+        ])
 
-export default async function AdminDashboardPage() {
-  const stats = await getStats()
+        setStats({
+          totalNews: newsCount || 0,
+          totalArtists: artistsCount || 0,
+          totalBookings: bookingsCount || 0,
+          pendingBookings: pendingCount || 0,
+        })
+      } catch (error) {
+        console.error('Error fetching stats:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchStats()
+  }, [supabase])
 
   const statCards = [
     { 
@@ -67,7 +89,6 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className="space-y-8">
-      {/* Header */}
       <div>
         <h1 className="font-[family-name:var(--font-gothic)] text-3xl text-cb-white mb-2">
           Dashboard
@@ -77,7 +98,6 @@ export default async function AdminDashboardPage() {
         </p>
       </div>
 
-      {/* Stats Grid */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {statCards.map((stat) => {
           const Icon = stat.icon
@@ -94,7 +114,7 @@ export default async function AdminDashboardPage() {
                 <TrendingUp className="w-4 h-4 text-cb-dim group-hover:text-cb-purple transition-colors" />
               </div>
               <div className="text-3xl font-black text-cb-white mb-1">
-                {stat.value}
+                {isLoading ? '-' : stat.value}
               </div>
               <div className="text-sm text-cb-muted">{stat.label}</div>
             </a>
@@ -102,7 +122,6 @@ export default async function AdminDashboardPage() {
         })}
       </div>
 
-      {/* Quick Actions */}
       <div className="bg-cb-abyss border border-cb-concrete p-6">
         <h2 className="text-lg font-bold text-cb-white mb-4">Quick Actions</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -123,30 +142,13 @@ export default async function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* Recent Activity Placeholder */}
-      <div className="bg-cb-abyss border border-cb-concrete p-6">
-        <h2 className="text-lg font-bold text-cb-white mb-4">Recent Activity</h2>
-        <div className="space-y-4">
-          <div className="flex items-center gap-4 p-4 bg-cb-black/50 border border-cb-concrete">
-            <div className="w-2 h-2 bg-cb-purple rounded-full" />
-            <div className="flex-1">
-              <p className="text-cb-white text-sm">Welcome to the admin panel</p>
-              <p className="text-cb-dim text-xs">System initialized</p>
-            </div>
-            <span className="text-cb-dim text-xs">Just now</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Setup Notice */}
       <div className="bg-yellow-500/10 border border-yellow-500/30 p-4">
         <div className="flex items-start gap-3">
           <LayoutDashboard className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
           <div>
-            <h3 className="text-yellow-400 font-medium mb-1">Database Setup Required</h3>
+            <h3 className="text-yellow-400 font-medium mb-1">Supabase Connected</h3>
             <p className="text-cb-muted text-sm">
-              Make sure to set your <code className="bg-cb-black px-1 py-0.5 rounded text-cb-purple">MONGODB_URI</code> environment variable. 
-              Create a .env.local file with your MongoDB connection string.
+              Make sure to run the schema.sql file in your Supabase SQL Editor to create the necessary tables.
             </p>
           </div>
         </div>
