@@ -1,0 +1,179 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { 
+  LayoutDashboard, 
+  Newspaper, 
+  Users, 
+  Calendar, 
+  Settings, 
+  LogOut,
+  Menu,
+  X,
+  Disc3
+} from 'lucide-react'
+
+const navItems = [
+  { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/admin/news', label: 'News', icon: Newspaper },
+  { href: '/admin/artists', label: 'Artists', icon: Users },
+  { href: '/admin/bookings', label: 'Bookings', icon: Calendar },
+  { href: '/admin/settings', label: 'Settings', icon: Settings },
+]
+
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
+
+  useEffect(() => {
+    // Check if user is authenticated
+    const checkAuth = async () => {
+      try {
+        const res = await fetch('/api/auth/check')
+        if (res.ok) {
+          setIsAuthenticated(true)
+        } else {
+          // Redirect to login if not authenticated and not already on login page
+          if (pathname !== '/admin') {
+            router.push('/admin')
+          }
+        }
+      } catch (error) {
+        console.error('Auth check failed:', error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    checkAuth()
+  }, [pathname, router])
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' })
+      router.push('/admin')
+    } catch (error) {
+      console.error('Logout failed:', error)
+    }
+  }
+
+  // Show loading while checking auth
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-cb-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-2 border-cb-purple border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-cb-muted">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Show login page if not authenticated
+  if (!isAuthenticated && pathname === '/admin') {
+    return children
+  }
+
+  // Show login redirect if not authenticated and trying to access other admin pages
+  if (!isAuthenticated) {
+    return null
+  }
+
+  return (
+    <div className="min-h-screen bg-cb-black flex">
+      {/* Mobile Sidebar Overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside className={`
+        fixed lg:static inset-y-0 left-0 z-50 w-64 bg-cb-abyss border-r border-cb-concrete
+        transform transition-transform duration-300 lg:transform-none
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      `}>
+        {/* Logo */}
+        <div className="h-16 flex items-center px-6 border-b border-cb-concrete">
+          <Link href="/admin/dashboard" className="flex items-center gap-3">
+            <Disc3 className="w-6 h-6 text-cb-purple" />
+            <span className="font-[family-name:var(--font-gothic)] text-xl text-cb-white">
+              CIRCUIT<span className="text-cb-purple">BREAKER</span>
+            </span>
+          </Link>
+        </div>
+
+        {/* Navigation */}
+        <nav className="p-4 space-y-1">
+          {navItems.map((item) => {
+            const Icon = item.icon
+            const isActive = pathname === item.href
+            
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setSidebarOpen(false)}
+                className={`
+                  flex items-center gap-3 px-4 py-3 rounded transition-all duration-200
+                  ${isActive 
+                    ? 'bg-cb-purple/20 text-cb-purple border-l-2 border-cb-purple' 
+                    : 'text-cb-muted hover:bg-cb-black hover:text-cb-white'}
+                `}
+              >
+                <Icon className="w-5 h-5" />
+                <span className="text-sm font-medium">{item.label}</span>
+              </Link>
+            )
+          })}
+        </nav>
+
+        {/* Bottom Actions */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-cb-concrete">
+          <Link 
+            href="/" 
+            target="_blank"
+            className="flex items-center gap-3 px-4 py-3 text-cb-muted hover:text-cb-white transition-colors mb-2"
+          >
+            <span className="text-sm">View Site</span>
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-4 py-3 w-full text-cb-muted hover:text-red-400 transition-colors"
+          >
+            <LogOut className="w-5 h-5" />
+            <span className="text-sm">Logout</span>
+          </button>
+        </div>
+      </aside>
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col min-w-0">
+        {/* Mobile Header */}
+        <header className="lg:hidden h-16 bg-cb-abyss border-b border-cb-concrete flex items-center px-4">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="p-2 text-cb-muted hover:text-cb-white"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+          <span className="ml-4 font-[family-name:var(--font-gothic)] text-lg text-cb-white">
+            Admin
+          </span>
+        </header>
+
+        {/* Page Content */}
+        <main className="flex-1 overflow-auto p-6 lg:p-8">
+          {children}
+        </main>
+      </div>
+    </div>
+  )
+}
