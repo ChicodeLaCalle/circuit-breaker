@@ -56,7 +56,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_OUT') {
         setIsAuthenticated(false)
-        router.push('/admin')
+        router.push('/')
       } else if (session) {
         setIsAuthenticated(true)
       }
@@ -69,7 +69,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     try {
       await fetch('/api/auth/logout', { method: 'POST' })
       await supabase.auth.signOut()
-      router.push('/admin')
+      router.push('/')
     } catch (error) {
       console.error('Logout failed:', error)
     }
@@ -110,8 +110,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       `}>
         <div className="h-16 flex items-center px-6 border-b border-cb-concrete">
           <Link href="/admin/dashboard" className="flex items-center gap-3">
-            <Disc3 className="w-6 h-6 text-cb-purple" />
-            <span className="font-[family-name:var(--font-gothic)] text-xl text-cb-white">
+            <Disc3 className="w-6 h-6 text-cb-purple flex-shrink-0" />
+            <span className="font-[family-name:var(--font-gothic)] text-lg sm:text-xl text-cb-white truncate">
               CIRCUIT<span className="text-cb-purple">BREAKER</span>
             </span>
           </Link>
@@ -160,19 +160,24 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="lg:hidden h-16 bg-cb-abyss border-b border-cb-concrete flex items-center px-4">
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="p-2 text-cb-muted hover:text-cb-white"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-          <span className="ml-4 font-[family-name:var(--font-gothic)] text-lg text-cb-white">
-            Admin
-          </span>
+        <header className="lg:hidden h-16 bg-cb-abyss border-b border-cb-concrete flex items-center justify-between px-4">
+          <div className="flex items-center">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="p-2 text-cb-muted hover:text-cb-white -ml-2"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+            <span className="ml-3 font-[family-name:var(--font-gothic)] text-lg text-cb-white">
+              Admin
+            </span>
+          </div>
+          <Link href="/" className="text-cb-muted hover:text-cb-white text-sm">
+            View Site
+          </Link>
         </header>
 
-        <main className="flex-1 overflow-auto p-6 lg:p-8">
+        <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
           {children}
         </main>
       </div>

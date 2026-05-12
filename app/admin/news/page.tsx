@@ -36,25 +36,25 @@ export default function AdminNewsPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-[family-name:var(--font-gothic)] text-3xl text-cb-white mb-2">
+          <h1 className="font-[family-name:var(--font-gothic)] text-2xl sm:text-3xl text-cb-white mb-1 sm:mb-2">
             News Articles
           </h1>
-          <p className="text-cb-muted">
+          <p className="text-cb-muted text-sm sm:text-base">
             Manage news articles and announcements
           </p>
         </div>
         <a
           href="/admin/news/new"
-          className="btn-primary flex items-center gap-2"
+          className="btn-primary flex items-center justify-center gap-2 whitespace-nowrap"
         >
           <Plus className="w-4 h-4" />
           Add Article
         </a>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-cb-dim" />
           <input
@@ -64,7 +64,7 @@ export default function AdminNewsPage() {
                      placeholder:text-cb-dim focus:border-cb-purple focus:outline-none transition-colors"
           />
         </div>
-        <select className="bg-cb-black border border-cb-concrete px-4 py-2 text-cb-white focus:border-cb-purple focus:outline-none">
+        <select className="bg-cb-black border border-cb-concrete px-4 py-2 text-cb-white focus:border-cb-purple focus:outline-none sm:w-auto">
           <option value="">All Categories</option>
           <option value="Tour">Tour</option>
           <option value="Release">Release</option>
@@ -74,7 +74,7 @@ export default function AdminNewsPage() {
         </select>
       </div>
 
-      <div className="bg-cb-abyss border border-cb-concrete overflow-hidden">
+      <div className="bg-cb-abyss border border-cb-concrete overflow-x-auto">
         {news.length === 0 ? (
           <div className="p-12 text-center">
             <Newspaper className="w-12 h-12 text-cb-concrete mx-auto mb-4" />

@@ -57,27 +57,27 @@ export default function AdminBookingsPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-[family-name:var(--font-gothic)] text-3xl text-cb-white mb-2">
+        <h1 className="font-[family-name:var(--font-gothic)] text-2xl sm:text-3xl text-cb-white mb-1 sm:mb-2">
           Booking Requests
         </h1>
-        <p className="text-cb-muted">Manage and respond to booking inquiries</p>
+        <p className="text-cb-muted text-sm sm:text-base">Manage and respond to booking inquiries</p>
       </div>
 
-      <div className="grid sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
         {[
           { label: 'Pending', value: stats.pending, color: 'text-yellow-400' },
           { label: 'Confirmed', value: stats.confirmed, color: 'text-green-400' },
           { label: 'Completed', value: stats.completed, color: 'text-blue-400' },
           { label: 'Declined', value: stats.declined, color: 'text-red-400' },
         ].map((stat) => (
-          <div key={stat.label} className="bg-cb-abyss border border-cb-concrete p-4 text-center">
-            <div className={`text-2xl font-black ${stat.color}`}>{stat.value}</div>
-            <div className="text-xs uppercase tracking-wider text-cb-muted">{stat.label}</div>
+          <div key={stat.label} className="bg-cb-abyss border border-cb-concrete p-3 sm:p-4 text-center">
+            <div className={`text-xl sm:text-2xl font-black ${stat.color}`}>{stat.value}</div>
+            <div className="text-[10px] sm:text-xs uppercase tracking-wider text-cb-muted">{stat.label}</div>
           </div>
         ))}
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-cb-dim" />
           <input
@@ -87,7 +87,7 @@ export default function AdminBookingsPage() {
                      placeholder:text-cb-dim focus:border-cb-purple focus:outline-none transition-colors"
           />
         </div>
-        <select className="bg-cb-black border border-cb-concrete px-4 py-2 text-cb-white focus:border-cb-purple focus:outline-none">
+        <select className="bg-cb-black border border-cb-concrete px-4 py-2 text-cb-white focus:border-cb-purple focus:outline-none sm:w-auto">
           <option value="">All Status</option>
           <option value="pending">Pending</option>
           <option value="confirmed">Confirmed</option>
@@ -96,7 +96,7 @@ export default function AdminBookingsPage() {
         </select>
       </div>
 
-      <div className="bg-cb-abyss border border-cb-concrete overflow-hidden">
+      <div className="bg-cb-abyss border border-cb-concrete overflow-x-auto">
         {bookings.length === 0 ? (
           <div className="p-12 text-center">
             <Calendar className="w-12 h-12 text-cb-concrete mx-auto mb-4" />

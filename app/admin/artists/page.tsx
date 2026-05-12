@@ -45,20 +45,20 @@ export default function AdminArtistsPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-[family-name:var(--font-gothic)] text-3xl text-cb-white mb-2">
+          <h1 className="font-[family-name:var(--font-gothic)] text-2xl sm:text-3xl text-cb-white mb-1 sm:mb-2">
             Artists
           </h1>
-          <p className="text-cb-muted">Manage your artist roster</p>
+          <p className="text-cb-muted text-sm sm:text-base">Manage your artist roster</p>
         </div>
-        <a href="/admin/artists/new" className="btn-primary flex items-center gap-2">
+        <a href="/admin/artists/new" className="btn-primary flex items-center justify-center gap-2 whitespace-nowrap">
           <Plus className="w-4 h-4" />
           Add Artist
         </a>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-cb-dim" />
           <input
@@ -68,7 +68,7 @@ export default function AdminArtistsPage() {
                      placeholder:text-cb-dim focus:border-cb-purple focus:outline-none transition-colors"
           />
         </div>
-        <select className="bg-cb-black border border-cb-concrete px-4 py-2 text-cb-white focus:border-cb-purple focus:outline-none">
+        <select className="bg-cb-black border border-cb-concrete px-4 py-2 text-cb-white focus:border-cb-purple focus:outline-none sm:w-auto">
           <option value="">All Status</option>
           <option value="available">Available</option>
           <option value="on-tour">On Tour</option>

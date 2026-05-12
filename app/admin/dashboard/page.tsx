@@ -90,33 +90,33 @@ export default function AdminDashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="font-[family-name:var(--font-gothic)] text-3xl text-cb-white mb-2">
+        <h1 className="font-[family-name:var(--font-gothic)] text-2xl sm:text-3xl text-cb-white mb-1 sm:mb-2">
           Dashboard
         </h1>
-        <p className="text-cb-muted">
+        <p className="text-cb-muted text-sm sm:text-base">
           Welcome back to the Circuit Breaker admin panel.
         </p>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         {statCards.map((stat) => {
           const Icon = stat.icon
           return (
             <a
               key={stat.label}
               href={stat.href}
-              className="bg-cb-abyss border border-cb-concrete p-6 hover:border-cb-purple/50 transition-all duration-300 group"
+              className="bg-cb-abyss border border-cb-concrete p-4 sm:p-6 hover:border-cb-purple/50 transition-all duration-300 group"
             >
-              <div className="flex items-start justify-between mb-4">
-                <div className={`w-12 h-12 ${stat.bgColor} border border-${stat.color}/30 flex items-center justify-center`}>
-                  <Icon className={`w-6 h-6 ${stat.color}`} />
+              <div className="flex items-start justify-between mb-2 sm:mb-4">
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 ${stat.bgColor} border border-${stat.color}/30 flex items-center justify-center`}>
+                  <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${stat.color}`} />
                 </div>
-                <TrendingUp className="w-4 h-4 text-cb-dim group-hover:text-cb-purple transition-colors" />
+                <TrendingUp className="w-4 h-4 text-cb-dim group-hover:text-cb-purple transition-colors hidden sm:block" />
               </div>
-              <div className="text-3xl font-black text-cb-white mb-1">
+              <div className="text-2xl sm:text-3xl font-black text-cb-white mb-1">
                 {isLoading ? '-' : stat.value}
               </div>
-              <div className="text-sm text-cb-muted">{stat.label}</div>
+              <div className="text-xs sm:text-sm text-cb-muted">{stat.label}</div>
             </a>
           )
         })}
@@ -124,7 +124,7 @@ export default function AdminDashboardPage() {
 
       <div className="bg-cb-abyss border border-cb-concrete p-6">
         <h2 className="text-lg font-bold text-cb-white mb-4">Quick Actions</h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {[
             { label: 'Add News Article', href: '/admin/news/new', color: 'bg-blue-600' },
             { label: 'Add Artist', href: '/admin/artists/new', color: 'bg-purple-600' },
@@ -134,7 +134,7 @@ export default function AdminDashboardPage() {
             <a
               key={action.label}
               href={action.href}
-              className={`${action.color} hover:opacity-90 text-white px-4 py-3 text-sm font-medium text-center transition-opacity`}
+              className={`${action.color} hover:opacity-90 text-white px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-medium text-center transition-opacity rounded-sm`}
             >
               {action.label}
             </a>
