@@ -1,13 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createClient } from '@/lib/supabase'
 import { Users, Plus, Search, Edit2, Trash2, MapPin, Disc3 } from 'lucide-react'
 
 export default function AdminArtistsPage() {
   const [artists, setArtists] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const supabase = createClientComponentClient()
+  const supabase = createClient()
 
   useEffect(() => {
     const fetchArtists = async () => {

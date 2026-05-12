@@ -1,13 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createClient } from '@/lib/supabase'
 import { Newspaper, Plus, Search, Edit2, Trash2, Eye } from 'lucide-react'
 
 export default function AdminNewsPage() {
   const [news, setNews] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const supabase = createClientComponentClient()
+  const supabase = createClient()
 
   useEffect(() => {
     const fetchNews = async () => {

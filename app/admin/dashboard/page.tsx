@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createClient } from '@/lib/supabase'
 import { 
   LayoutDashboard, 
   Newspaper, 
@@ -19,7 +19,7 @@ export default function AdminDashboardPage() {
     pendingBookings: 0,
   })
   const [isLoading, setIsLoading] = useState(true)
-  const supabase = createClientComponentClient()
+  const supabase = createClient()
 
   useEffect(() => {
     const fetchStats = async () => {
