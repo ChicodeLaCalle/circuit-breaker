@@ -1,9 +1,6 @@
 -- Supabase Schema for Circuit Breaker
 -- Run this in the Supabase SQL Editor
 
--- Enable RLS (Row Level Security)
-alter table auth.users enable row level security;
-
 -- News Articles Table
 CREATE TABLE IF NOT EXISTS news (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
