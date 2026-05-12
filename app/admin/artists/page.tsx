@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { createClient } from '@/lib/supabase'
+import { createClient } from '@/lib/supabase/client'
 import { Users, Plus, Search, Edit2, Trash2, MapPin, Disc3 } from 'lucide-react'
 
 export default function AdminArtistsPage() {
