@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { createClient } from '@/lib/supabase/server'
 
 export async function POST(req: Request) {
   try {
     // Sign out from Supabase
-    await supabaseAdmin.auth.signOut()
+    const supabase = await createClient()
+    await supabase.auth.signOut()
 
     const response = NextResponse.json(
       { message: 'Logged out successfully' },

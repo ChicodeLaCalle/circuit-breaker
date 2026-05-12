@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { createServerClient, type CookieOptions } from '@supabase/ssr'
 
 export async function POST(req: NextRequest) {
+  let response = NextResponse.json({ message: 'Login successful' }, { status: 200 })
+  
   try {
     const { email, password } = await req.json()
 
@@ -12,8 +14,30 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          get(name: string) {
+            return req.cookies.get(name)?.value
+          },
+          set(name: string, value: string, options: CookieOptions) {
+            req.cookies.set({ name, value, ...options })
+            response = NextResponse.json({ message: 'Login successful' }, { status: 200 })
+            response.cookies.set({ name, value, ...options })
+          },
+          remove(name: string, options: CookieOptions) {
+            req.cookies.set({ name, value: '', ...options })
+            response = NextResponse.json({ message: 'Login successful' }, { status: 200 })
+            response.cookies.set({ name, value: '', ...options })
+          },
+        },
+      }
+    )
+
     // Sign in with Supabase Auth
-    const { data, error } = await supabaseAdmin.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     })
@@ -25,12 +49,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    // Set cookie with Supabase session
-    const response = NextResponse.json(
-      { message: 'Login successful' },
-      { status: 200 }
-    )
-
+    // Set cookies with Supabase session
     response.cookies.set('sb-access-token', data.session.access_token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',

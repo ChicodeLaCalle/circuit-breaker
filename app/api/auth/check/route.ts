@@ -1,29 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
+import { createServerClient, type CookieOptions } from '@supabase/ssr'
 
 export async function GET(req: NextRequest) {
-  try {
-    const accessToken = req.cookies.get('sb-access-token')?.value
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return req.cookies.get(name)?.value
+        },
+        set(name: string, value: string, options: CookieOptions) {
+          // Read-only in GET request
+        },
+        remove(name: string, options: CookieOptions) {
+          // Read-only in GET request
+        },
+      },
+    }
+  )
 
-    if (!accessToken) {
+  try {
+    const { data: { session } } = await supabase.auth.getSession()
+
+    if (!session) {
       return NextResponse.json(
         { message: 'Not authenticated' },
         { status: 401 }
       )
     }
 
-    // Verify session with Supabase
-    const { data: { user }, error } = await supabaseAdmin.auth.getUser(accessToken)
-
-    if (error || !user) {
-      return NextResponse.json(
-        { message: 'Invalid session' },
-        { status: 401 }
-      )
-    }
-
     return NextResponse.json(
-      { message: 'Authenticated', user },
+      { message: 'Authenticated', user: session.user },
       { status: 200 }
     )
   } catch (error) {
